@@ -7,11 +7,11 @@ namespace UnitTests.Core.Managers
     [Intercept(typeof(EventPublisher))]
     public class ProcessManager : IProcessManager
     {
-        private EventManager _eventPublisher;
+        private EventManager _eventManager;
 
-        public ProcessManager(EventManager eventPublisher)
+        public ProcessManager(EventManager eventManager)
         {
-            _eventPublisher = eventPublisher;
+            _eventManager = eventManager;
         }
 
         public Process Create()
@@ -42,7 +42,7 @@ namespace UnitTests.Core.Managers
         {
             process.Status = ProcessStatus.Cancelled;
 
-            _eventPublisher.Publish("PROCESS_CANCELLED");
+            _eventManager.Publish("PROCESS_CANCELLED");
         }
     }
 }

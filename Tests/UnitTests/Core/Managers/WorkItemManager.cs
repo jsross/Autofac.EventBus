@@ -7,18 +7,18 @@ namespace UnitTests.Core.Managers
     [Intercept(typeof(EventPublisher))]
     public class WorkItemManager : IWorkItemManager
     {
-        private EventManager _eventPublisher;
+        private EventManager _eventManager;
 
-        public WorkItemManager(EventManager eventPublisher)
+        public WorkItemManager(EventManager eventManager)
         {
-            _eventPublisher = eventPublisher;
+            _eventManager = eventManager;
         }
 
         public void Start(WorkItem workItem)
         {
             workItem.Status = WorkItemStatus.InProgress;
 
-            _eventPublisher.Publish(EventRefKeys.WORKITEM_STARTED, workItem);
+            _eventManager.Publish(EventRefKeys.WORKITEM_STARTED, workItem);
             //whats missing here is some sort of workflow context, or a 
             //Unit of work context
         }
@@ -27,7 +27,7 @@ namespace UnitTests.Core.Managers
         {
             workItem.Status = WorkItemStatus.Completed;
 
-            _eventPublisher.Publish(EventRefKeys.WORKITEM_COMPLETED, workItem);
+            _eventManager.Publish(EventRefKeys.WORKITEM_COMPLETED, workItem);
         }
 
         public void Cancelled(WorkItem workItem)
