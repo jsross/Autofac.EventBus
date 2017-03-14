@@ -15,16 +15,22 @@ namespace UnitTests.Core
 
             builder.RegisterType<ProcessManager>()
                    .As<IProcessManager>()
+                   .InstancePerLifetimeScope()
                    .EnableInterfaceInterceptors();
 
             builder.RegisterType<WorkItemManager>()
                    .As<IWorkItemManager>()
+                   .InstancePerLifetimeScope()
                    .EnableInterfaceInterceptors();
 
-            builder.RegisterType<WorkflowEventManager>();
+            builder.RegisterType<WorkflowEventManager>()
+                   .InstancePerLifetimeScope();
 
-            builder.RegisterType<EventPublisher>();
-            builder.RegisterType<EventManager>();
+            builder.RegisterType<EventPublisher>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<EventManager>()
+                   .InstancePerLifetimeScope();
 
             builder.Register((e) =>
             {
