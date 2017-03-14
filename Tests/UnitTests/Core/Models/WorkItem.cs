@@ -6,5 +6,10 @@
         {
             get; set;
         }
+
+        public Process Process
+        {
+            get; set;
+        }
     }
 }

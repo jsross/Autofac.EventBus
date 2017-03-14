@@ -1,62 +1,21 @@
-﻿using Autofac;
-using System.Collections.Generic;
+﻿using Castle.DynamicProxy;
 
 namespace Core
 {
-    public class EventPublisher
+    public class EventPublisher : IInterceptor
     {
-        private Queue<PublishedEntry> _entries;
+        private EventManager _eventManager;
 
-        private Registry _registry;
-        private ILifetimeScope _scope;
-
-        public EventPublisher(Registry registry, ILifetimeScope scope)
+        public EventPublisher(EventManager eventManager)
         {
-            _registry = registry;
-            _scope = scope;
-
-            _entries = new Queue<PublishedEntry>();
-        }
-         
-        public void Publish(string eventName, params object[] arguments)
-        {
-            var entry = new PublishedEntry
-            {
-                EventName = eventName,
-                EventArguments = arguments
-            };
-            
-            _entries.Enqueue(entry);
+            _eventManager = eventManager;
         }
 
-        public void ProcessEvents()
+        public void Intercept(IInvocation invocation)
         {
-            while(_entries.Peek() != null)
-            {
-                var entry = _entries.Dequeue();
+            invocation.Proceed();
 
-                ProcessEvent(entry);
-            }
-        }
-
-        private void ProcessEvent(PublishedEntry entry)
-        {
-            var listeners = _registry.GetListeners(entry.EventName);
-
-            foreach(var listener in listeners)
-            {
-                //TODO (JSR) Find way to map entity objects to invoke params using method arguments
-                //var methodArguments = listener.GetGenericArguments();
-                //var parameters = new List<object>();
-
-                //foreach(var methodArgument in methodArguments)
-                //{
-
-                //}
-
-                var instance = _scope.Resolve(listener.DeclaringType);
-                listener.Invoke(instance, entry.EventArguments);
-            }
+            _eventManager.ProcessEvents();
         }
     }
 }

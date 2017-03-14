@@ -2,12 +2,13 @@
 
 namespace UnitTests.Core.Models
 {
-    public class Workflow
+    public class Process
     {
-        public WorkflowStatus Status { get; set; }
+        public ProcessStatus Status { get; set; }
+
         public List<WorkItem> WorkItems { get; private set; }
 
-        public Workflow()
+        public Process()
         {
             WorkItems = new List<WorkItem>();
         }

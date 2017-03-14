@@ -9,7 +9,7 @@ namespace Core
 
         public void Register(string eventName, MethodInfo method)
         {
-            if (!entries.ContainsKey("eventName"))
+            if (!entries.ContainsKey(eventName))
             {
                 entries[eventName] = new List<MethodInfo>();
             }

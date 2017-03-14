@@ -1,9 +1,10 @@
 ﻿namespace UnitTests.Core.Models
 {
-    public enum WorkflowStatus
+    public enum ProcessStatus
     {
         Created,
         InProgress,
-        Completed
+        Completed,
+        Cancelled
     }
 }

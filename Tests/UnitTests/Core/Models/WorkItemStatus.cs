@@ -4,6 +4,7 @@
     {
         Created,
         InProgress,
-        Completed
+        Completed,
+        Cancelled
     }
 }
