@@ -29,9 +29,6 @@ namespace UnitTests
             workItemManager.Start(firstWorkItem);
 
             Assert.AreEqual(ProcessStatus.InProgress, process.Status);
-
-            // TODO: Add your test code here
-            Assert.Pass("Your first passing test");
         }
     }
 }
