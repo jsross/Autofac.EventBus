@@ -19,8 +19,6 @@ namespace UnitTests.Core.Managers
             workItem.Status = WorkItemStatus.InProgress;
 
             _eventManager.Publish(EventRefKeys.WORKITEM_STARTED, workItem);
-            //whats missing here is some sort of workflow context, or a 
-            //Unit of work context
         }
 
         public void Complete(WorkItem workItem)
@@ -33,6 +31,8 @@ namespace UnitTests.Core.Managers
         public void Cancelled(WorkItem workItem)
         {
             workItem.Status = WorkItemStatus.Cancelled;
+
+            _eventManager.Publish(EventRefKeys.WORKITEM_CANCELLED, workItem);
         }
     }
 }

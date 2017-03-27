@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="Core\AutofacConfig.cs" />
     <Compile Include="Core\Managers\IProcessManager.cs" />
+    <Compile Include="Core\Managers\IProcessNotificationManager.cs" />
     <Compile Include="Core\Managers\IWorkItemManager.cs" />
+    <Compile Include="Core\Managers\ProcessNotificationManager.cs" />
     <Compile Include="Core\Managers\WorkflowEventManager.cs" />
     <Compile Include="Core\Models\EventRefKeys.cs" />
     <Compile Include="Core\Models\Process.cs" />

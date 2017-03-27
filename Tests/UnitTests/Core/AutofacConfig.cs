@@ -23,7 +23,11 @@ namespace UnitTests.Core
                    .InstancePerLifetimeScope()
                    .EnableInterfaceInterceptors();
 
-            builder.RegisterType<WorkflowEventManager>()
+            builder.RegisterType<WorkflowEventHandler>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<ProcessNotificationManager>()
+                   .As<IProcessNotificationManager>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<EventPublisher>()

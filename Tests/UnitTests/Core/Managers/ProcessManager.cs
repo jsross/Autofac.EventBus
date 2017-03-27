@@ -25,24 +25,30 @@ namespace UnitTests.Core.Managers
             process.WorkItems.Add(new WorkItem { Status = WorkItemStatus.Created, Process = process });
             process.WorkItems.Add(new WorkItem { Status = WorkItemStatus.Created, Process = process });
 
+            _eventManager.Publish(EventRefKeys.PROCESS_CREATED, process);
+
             return process;
         }
 
         public void Start(Process process)
         {
             process.Status = ProcessStatus.InProgress;
+
+            _eventManager.Publish(EventRefKeys.PROCESS_STARTED, process);
         }
 
         public void Complete(Process process)
         {
             process.Status = ProcessStatus.Completed;
+
+            _eventManager.Publish(EventRefKeys.PROCESS_COMPLETED, process);
         }
 
         public void Cancel(Process process)
         {
             process.Status = ProcessStatus.Cancelled;
 
-            _eventManager.Publish("PROCESS_CANCELLED");
+            _eventManager.Publish(EventRefKeys.PROCESS_CANCELLED, process);
         }
     }
 }

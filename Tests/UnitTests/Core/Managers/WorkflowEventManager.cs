@@ -1,22 +1,23 @@
 ﻿using Core;
+using Core.Attributes;
 using System.Linq;
 using UnitTests.Core.Models;
 
 namespace UnitTests.Core.Managers
 {
-    public class WorkflowEventManager
+    public class WorkflowEventHandler
     {
         private IProcessManager _processManager;
         private IWorkItemManager _workItemManager;
 
-        public WorkflowEventManager(IProcessManager processManager,
+        public WorkflowEventHandler(IProcessManager processManager,
                                     IWorkItemManager workItemManager)
         {
             _processManager = processManager;
             _workItemManager = workItemManager;
         }
 
-        [EventListenerAttribute(EventRefKeys.WORKITEM_STARTED)]
+        [StringMatchListener(EventRefKeys.WORKITEM_STARTED)]
         public void HandleWorkItemStarted(WorkItem workItem)
         {
             var process = workItem.Process;
@@ -27,7 +28,7 @@ namespace UnitTests.Core.Managers
             }
         }
 
-        [EventListenerAttribute(EventRefKeys.WORKITEM_COMPLETED)]
+        [StringMatchListener(EventRefKeys.WORKITEM_COMPLETED)]
         public void HandleWorkItemCompleted(WorkItem workItem)
         {
             var process = workItem.Process;
@@ -38,7 +39,7 @@ namespace UnitTests.Core.Managers
             }
         }
 
-        [EventListenerAttribute(EventRefKeys.PROCESS_CANCELLED)]
+        [StringMatchListener(EventRefKeys.PROCESS_CANCELLED)]
         public void HandleProcessCancelled(Process process)
         {
             foreach (var workItem in process.WorkItems)

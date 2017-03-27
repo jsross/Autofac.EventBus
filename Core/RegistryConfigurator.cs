@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Core.Attributes;
+using System.Linq;
 using System.Reflection;
 
 namespace Core
@@ -10,15 +11,15 @@ namespace Core
             var registry = new Registry();
 
             var methods = assembly.GetTypes()
-                      .SelectMany(t => t.GetMethods())
-                      .Where(m => m.GetCustomAttributes(typeof(EventListenerAttribute), false).Length > 0)
-                      .ToArray();
+                                  .SelectMany(t => t.GetMethods())
+                                  .Where(m => m.GetCustomAttributes(typeof(EventListenerAttribute), false).Length > 0)
+                                  .ToArray();
 
             foreach (var method in methods)
             {
-                var attrib = method.GetCustomAttribute<EventListenerAttribute>();
+                var attribute = method.GetCustomAttribute<EventListenerAttribute>();
 
-                registry.Register(attrib.EventName, method);
+                registry.Register(attribute, method);
             }
 
             return registry;
