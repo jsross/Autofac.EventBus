@@ -25,7 +25,7 @@ namespace UnitTests.Core.Managers
             process.WorkItems.Add(new WorkItem { Status = WorkItemStatus.Created, Process = process });
             process.WorkItems.Add(new WorkItem { Status = WorkItemStatus.Created, Process = process });
 
-            _eventManager.Publish(EventRefKeys.PROCESS_CREATED, process);
+            _eventManager.Publish(EventRefKeys.PROCESS_CREATED, new { process = process });
 
             return process;
         }
@@ -34,21 +34,21 @@ namespace UnitTests.Core.Managers
         {
             process.Status = ProcessStatus.InProgress;
 
-            _eventManager.Publish(EventRefKeys.PROCESS_STARTED, process);
+            _eventManager.Publish(EventRefKeys.PROCESS_STARTED, new { process = process });
         }
 
         public void Complete(Process process)
         {
             process.Status = ProcessStatus.Completed;
 
-            _eventManager.Publish(EventRefKeys.PROCESS_COMPLETED, process);
+            _eventManager.Publish(EventRefKeys.PROCESS_COMPLETED, new { process = process });
         }
 
         public void Cancel(Process process)
         {
             process.Status = ProcessStatus.Cancelled;
 
-            _eventManager.Publish(EventRefKeys.PROCESS_CANCELLED, process);
+            _eventManager.Publish(EventRefKeys.PROCESS_CANCELLED, new { process = process });
         }
     }
 }
