@@ -75,15 +75,6 @@ namespace Core
 
             foreach(var listener in listeners)
             {
-                //TODO (JSR) Find way to map entity objects to invoke params using method arguments
-                //var methodArguments = listener.GetGenericArguments();
-                //var parameters = new List<object>();
-
-                //foreach(var methodArgument in methodArguments)
-                //{
-
-                //}
-
                 var instance = _scope.Resolve(listener.DeclaringType);
 
                 var parameters = listener.GetParameters();
