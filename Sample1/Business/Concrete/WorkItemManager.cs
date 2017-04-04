@@ -1,8 +1,9 @@
 ﻿using Autofac.Extras.DynamicProxy;
 using Core;
-using UnitTests.Core.Models;
+using Sample1.Business.Abstract;
+using Sample1.Models;
 
-namespace UnitTests.Core.Managers
+namespace Sample1.Business.Concrete
 {
     [Intercept(typeof(EventPublisher))]
     public class WorkItemManager : IWorkItemManager

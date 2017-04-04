@@ -1,4 +1,4 @@
-﻿namespace UnitTests.Core.Models
+﻿namespace Sample1.Models
 {
     public class WorkItem
     {
@@ -7,7 +7,7 @@
             get; set;
         }
 
-        public Process Process
+        public MultiStepTask MultiStepTask
         {
             get; set;
         }

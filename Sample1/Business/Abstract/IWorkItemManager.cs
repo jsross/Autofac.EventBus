@@ -1,11 +1,13 @@
-﻿using UnitTests.Core.Models;
+﻿using Sample1.Models;
 
-namespace UnitTests.Core.Managers
+namespace Sample1.Business.Abstract
 {
     public interface IWorkItemManager
     {
         void Start(WorkItem workItem);
+
         void Complete(WorkItem workItem);
+
         void Cancelled(WorkItem workItem);
     }
 }

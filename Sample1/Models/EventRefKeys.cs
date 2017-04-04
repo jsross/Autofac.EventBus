@@ -1,4 +1,4 @@
-﻿namespace UnitTests.Core.Models
+﻿namespace Sample1.Models
 {
     public static class EventRefKeys
     {

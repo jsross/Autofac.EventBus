@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace UnitTests.Core.Models
+namespace Sample1.Models
 {
-    public class Process
+    public class MultiStepTask
     {
-        public ProcessStatus Status { get; set; }
+        public MultiStepTaskStatus Status { get; set; }
 
         public List<WorkItem> WorkItems { get; private set; }
 
-        public Process()
+        public MultiStepTask()
         {
             WorkItems = new List<WorkItem>();
         }

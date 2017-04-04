@@ -1,20 +1,20 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Core;
+using Sample1.Business.Abstract;
+using Sample1.Business.Concrete;
 using System.Reflection;
-using UnitTests.Core.Managers;
 
-namespace UnitTests.Core
+namespace UnitTests
 {
-
-    public static class AutofacConfig
+    public class AutofacConfig
     {
         public static IContainer Configure()
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<ProcessManager>()
-                   .As<IProcessManager>()
+            builder.RegisterType<MultiStepTaskManager>()
+                   .As<IMultiStepTaskManager>()
                    .InstancePerLifetimeScope()
                    .EnableInterfaceInterceptors();
 
@@ -24,10 +24,11 @@ namespace UnitTests.Core
                    .EnableInterfaceInterceptors();
 
             builder.RegisterType<WorkflowEventHandler>()
+                   .As<IWorkflowEventHandler>()
                    .InstancePerLifetimeScope();
 
-            builder.RegisterType<ProcessNotificationManager>()
-                   .As<IProcessNotificationManager>()
+            builder.RegisterType<MultiStepTaskNotificationManager>()
+                   .As<IMultiStepTaskNotificationManager>()
                    .InstancePerLifetimeScope();
 
             builder.RegisterType<EventPublisher>()
@@ -38,13 +39,13 @@ namespace UnitTests.Core
 
             builder.Register((e) =>
             {
-                var assembly = Assembly.Load("UnitTests");
+                var assembly = Assembly.Load("Sample1");
 
                 var registry = RegistryConfigurator.Configure(assembly);
 
                 return registry;
             });
-            
+
             var container = builder.Build();
 
             return container;

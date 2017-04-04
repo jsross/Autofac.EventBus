@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Linq;
-using UnitTests.Core;
 using Autofac;
-using UnitTests.Core.Managers;
-using UnitTests.Core.Models;
+using Sample1.Business.Abstract;
+using Sample1.Models;
 
 namespace UnitTests
 {
@@ -17,18 +16,18 @@ namespace UnitTests
 
             ILifetimeScope scope = container.BeginLifetimeScope();
 
-            var processManager = scope.Resolve<IProcessManager>();
+            var processManager = scope.Resolve<IMultiStepTaskManager>();
             var workItemManager = scope.Resolve<IWorkItemManager>();
 
-            var process = processManager.Create();
+            var multiStepTask = processManager.Create();
 
-            Assert.AreEqual(ProcessStatus.Created, process.Status);
+            Assert.AreEqual(MultiStepTaskStatus.Created, multiStepTask.Status);
 
-            var firstWorkItem = process.WorkItems.First();
+            var firstWorkItem = multiStepTask.WorkItems.First();
 
             workItemManager.Start(firstWorkItem);
 
-            Assert.AreEqual(ProcessStatus.InProgress, process.Status);
+            Assert.AreEqual(MultiStepTaskStatus.InProgress, multiStepTask.Status);
         }
     }
 }
