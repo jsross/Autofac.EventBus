@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Core;
+using Core.EventManagement.Configuration;
 using Sample1.Business.Abstract;
 using Sample1.Business.Concrete;
 using System.Reflection;
@@ -31,20 +32,7 @@ namespace UnitTests
                    .As<IMultiStepTaskNotificationManager>()
                    .InstancePerLifetimeScope();
 
-            builder.RegisterType<EventPublisher>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<EventManager>()
-                   .InstancePerLifetimeScope();
-
-            builder.Register((e) =>
-            {
-                var assembly = Assembly.Load("Sample1");
-
-                var registry = RegistryConfigurator.Configure(assembly);
-
-                return registry;
-            });
+            builder.RegisterModule(new WorkflowModule(Assembly.Load("Sample1")));
 
             var container = builder.Build();
 

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Core
+namespace Core.EventManagement.Models
 {
-    public class PublishedEntry
+    public class Event
     {
         public string EventName { get; set; }
 

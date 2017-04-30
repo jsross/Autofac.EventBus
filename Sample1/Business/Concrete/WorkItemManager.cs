@@ -1,16 +1,17 @@
 ﻿using Autofac.Extras.DynamicProxy;
-using Core;
+using Core.EventManagement.Abstract;
+using Core.EventManager.Attributes;
 using Sample1.Business.Abstract;
 using Sample1.Models;
 
 namespace Sample1.Business.Concrete
 {
-    [Intercept(typeof(EventPublisher))]
+    [Intercept(typeof(EventPublisherInterceptor))]
     public class WorkItemManager : IWorkItemManager
     {
-        private EventManager _eventManager;
+        private IEventHub _eventManager;
 
-        public WorkItemManager(EventManager eventManager)
+        public WorkItemManager(IEventHub eventManager)
         {
             _eventManager = eventManager;
         }
@@ -19,21 +20,21 @@ namespace Sample1.Business.Concrete
         {
             workItem.Status = WorkItemStatus.InProgress;
 
-            _eventManager.Publish(EventRefKeys.WORKITEM_STARTED, new { workItem });
+            _eventManager.Enqueue(EventRefKeys.WORKITEM_STARTED, new { workItem });
         }
 
         public void Complete(WorkItem workItem)
         {
             workItem.Status = WorkItemStatus.Completed;
 
-            _eventManager.Publish(EventRefKeys.WORKITEM_COMPLETED, new { workItem });
+            _eventManager.Enqueue(EventRefKeys.WORKITEM_COMPLETED, new { workItem });
         }
 
         public void Cancelled(WorkItem workItem)
         {
             workItem.Status = WorkItemStatus.Cancelled;
 
-            _eventManager.Publish(EventRefKeys.WORKITEM_CANCELLED, new { workItem });
+            _eventManager.Enqueue(EventRefKeys.WORKITEM_CANCELLED, new { workItem });
         }
     }
 }

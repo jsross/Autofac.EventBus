@@ -1,17 +1,18 @@
 ﻿using Core.Attributes;
+using Core.EventManagement.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Caching;
 
-namespace Core
+namespace Core.EventManagement.Concrete
 {
-    public class Registry
+    public class ListenerRegistry : IListenerRegistry
     {
         private List<Tuple<EventListenerAttribute, MethodInfo>> _entries;
         private MemoryCache _cache;
 
-        public Registry()
+        public ListenerRegistry()
         {
             _entries = new List<Tuple<EventListenerAttribute, MethodInfo>>();
             _cache = new MemoryCache("RegistryCache");

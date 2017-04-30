@@ -1,28 +1,29 @@
 ﻿using Autofac;
+using Core.EventManagement.Abstract;
+using Core.EventManagement.Models;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
-namespace Core
+namespace Core.EventManagement.Concrete
 {
-    public class EventManager
+    public class EventHub : IEventHub
     {
         private const string EVENT_CONTEXT_KEY = "event";
 
-        private Queue<PublishedEntry> _entries;
+        private Queue<Event> _entries;
 
-        private Registry _registry;
+        private IListenerRegistry _registry;
         private ILifetimeScope _scope;
 
-        public EventManager(Registry registry, ILifetimeScope scope)
+        public EventHub(IListenerRegistry registry, ILifetimeScope scope)
         {
             _registry = registry;
             _scope = scope;
 
-            _entries = new Queue<PublishedEntry>();
+            _entries = new Queue<Event>();
         }
          
-        public void Publish(string @event, object context = null)
+        public void Enqueue(string @event, object context = null)
         {
             Dictionary<string, object> dictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 
@@ -49,7 +50,7 @@ namespace Core
 
             dictionary[EVENT_CONTEXT_KEY] = @event; 
 
-            var entry = new PublishedEntry
+            var entry = new Event
             {
                 EventName = @event,
                 Context = dictionary
@@ -58,7 +59,7 @@ namespace Core
             _entries.Enqueue(entry);
         }
 
-        public void ProcessEvents()
+        public void ProcessQueue()
         {
             while(_entries.Count > 0)
             {
@@ -68,7 +69,7 @@ namespace Core
             }
         }
 
-        private void ProcessEvent(PublishedEntry entry)
+        private void ProcessEvent(Event entry)
         {
             var listeners = _registry.GetListeners(entry.EventName);
             var context = entry.Context;
