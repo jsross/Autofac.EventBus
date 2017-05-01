@@ -1,5 +1,4 @@
-﻿using Core.Attributes;
-using Sample1.Business.Abstract;
+﻿using Sample1.Business.Abstract;
 using Sample1.Models;
 using System.Linq;
 

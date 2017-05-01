@@ -1,4 +1,4 @@
-﻿using Core.Attributes;
+﻿using Core.EventManager.Attributes;
 using System.Collections.Generic;
 using System.Reflection;
 

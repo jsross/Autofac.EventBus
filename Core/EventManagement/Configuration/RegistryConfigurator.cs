@@ -1,6 +1,6 @@
-﻿using Core.Attributes;
-using Core.EventManagement.Abstract;
+﻿using Core.EventManagement.Abstract;
 using Core.EventManagement.Concrete;
+using Core.EventManager.Attributes;
 using System.Linq;
 using System.Reflection;
 

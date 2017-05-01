@@ -54,14 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\EventListenerAttribute.cs" />
-    <Compile Include="Attributes\StringMatchListenerAttribute.cs" />
+    <Compile Include="EventManagement\Attributes\EventListenerAttribute.cs" />
+    <Compile Include="EventManagement\Attributes\StringMatchListenerAttribute.cs" />
     <Compile Include="EventManagement\Abstract\IEventHub.cs" />
     <Compile Include="EventManagement\Abstract\IListenerRegistry.cs" />
     <Compile Include="EventManagement\Concrete\EventHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventManagement\Model\Event.cs" />
-    <Compile Include="Attributes\RegexListenerAttribute.cs" />
+    <Compile Include="EventManagement\Attributes\RegexListenerAttribute.cs" />
     <Compile Include="EventManagement\Concrete\ListenerRegistry.cs" />
     <Compile Include="EventManagement\Attributes\EventPublisherInterceptor.cs" />
     <Compile Include="EventManagement\Configuration\RegistryConfigurator.cs" />

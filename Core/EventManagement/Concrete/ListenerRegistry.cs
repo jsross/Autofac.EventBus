@@ -1,5 +1,5 @@
-﻿using Core.Attributes;
-using Core.EventManagement.Abstract;
+﻿using Core.EventManagement.Abstract;
+using Core.EventManager.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
