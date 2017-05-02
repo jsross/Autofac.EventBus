@@ -1,6 +1,6 @@
 ﻿using Autofac.Extras.DynamicProxy;
-using Core.EventManagement.Abstract;
-using Core.EventManager.Attributes;
+using Core.EventManagement.Infrastructure;
+using Core.EventManager.Configuration.Attributes;
 using Sample1.Business.Abstract;
 using Sample1.Models;
 

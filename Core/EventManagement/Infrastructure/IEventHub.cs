@@ -1,4 +1,4 @@
-﻿namespace Core.EventManagement.Abstract
+﻿namespace Core.EventManagement.Infrastructure
 {
     public interface IEventHub
     {

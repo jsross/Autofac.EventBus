@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.EventManager.Attributes
+namespace Core.EventManager.Configuration.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
     public abstract class EventListenerAttribute : Attribute

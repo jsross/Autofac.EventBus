@@ -1,10 +1,9 @@
 ﻿using Autofac;
-using Core.EventManagement.Abstract;
 using Core.EventManagement.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Core.EventManagement.Concrete
+namespace Core.EventManagement.Infrastructure
 {
     public class EventHub : IEventHub
     {

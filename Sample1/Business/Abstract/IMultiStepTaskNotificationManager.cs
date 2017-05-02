@@ -1,4 +1,4 @@
-﻿using Core.EventManager.Attributes;
+﻿using Core.EventManager.Configuration.Attributes;
 using Sample1.Models;
 
 namespace Sample1.Business.Abstract

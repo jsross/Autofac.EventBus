@@ -1,11 +1,10 @@
-﻿using Core.EventManagement.Abstract;
-using Core.EventManager.Attributes;
+﻿using Core.EventManager.Configuration.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Caching;
 
-namespace Core.EventManagement.Concrete
+namespace Core.EventManagement.Infrastructure
 {
     public class ListenerRegistry : IListenerRegistry
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Core.EventManager.Attributes
+namespace Core.EventManager.Configuration.Attributes
 {
     public class StringMatchListenerAttribute : EventListenerAttribute
     {

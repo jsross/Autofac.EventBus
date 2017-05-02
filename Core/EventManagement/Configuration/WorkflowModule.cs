@@ -1,7 +1,6 @@
 ﻿using Autofac;
-using Core.EventManagement.Abstract;
-using Core.EventManagement.Concrete;
-using Core.EventManager.Attributes;
+using Core.EventManagement.Infrastructure;
+using Core.EventManager.Configuration.Attributes;
 using System.Reflection;
 
 namespace Core.EventManagement.Configuration

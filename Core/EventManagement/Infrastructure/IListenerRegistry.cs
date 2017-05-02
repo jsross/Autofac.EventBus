@@ -1,8 +1,8 @@
-﻿using Core.EventManager.Attributes;
+﻿using Core.EventManager.Configuration.Attributes;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Core.EventManagement.Abstract
+namespace Core.EventManagement.Infrastructure
 {
     public interface IListenerRegistry
     {
