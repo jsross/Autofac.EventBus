@@ -2,6 +2,7 @@
 using Core.EventManagement.Models;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Core.EventManagement.Infrastructure
 {
@@ -13,6 +14,8 @@ namespace Core.EventManagement.Infrastructure
 
         private IListenerRegistry _registry;
         private ILifetimeScope _scope;
+
+        private bool _inProcess = false;
 
         public EventHub(IListenerRegistry registry, ILifetimeScope scope)
         {
@@ -70,47 +73,66 @@ namespace Core.EventManagement.Infrastructure
 
         private void ProcessEvent(Event entry)
         {
+            if (_inProcess)
+                return;
+
+            _inProcess = true;
+
             var listeners = _registry.GetListeners(entry.EventName);
             var context = entry.Context;
 
             foreach(var listener in listeners)
             {
-                var instance = _scope.Resolve(listener.DeclaringType);
+                object instance = null;
 
-                var parameters = listener.GetParameters();
+                var resolved = _scope.TryResolve(listener.DeclaringType, out instance);
 
-                object[] arguments = null;
+                if (!resolved)
+                    continue;
 
-                if (parameters.Length > 0)
-                {
-                    arguments = new object[parameters.Length];
-
-                    for (var index = 0; index < parameters.Length; index++)
-                    {
-                        var parameter = parameters[index];
-
-                        var parameterName = parameter.Name;
-
-                        if (!context.ContainsKey(parameterName))
-                        {
-                            var paramaterType = parameter.ParameterType;
-
-                            bool canBeNull = !paramaterType.IsValueType || (Nullable.GetUnderlyingType(paramaterType) != null);
-
-                            if (!canBeNull)
-                            {
-                                throw new Exception("Unable to find value in context for unnullable type");
-                            }
-
-                            continue;
-                        }
-
-                        arguments[index] = context[parameterName];
-                    }
-                }
+                var arguments = MapArguments(listener, context);
 
                 listener.Invoke(instance, arguments);
             }
+
+            _inProcess = false;
+        }
+
+        private object[] MapArguments(MethodInfo listener, Dictionary<string, object> context)
+        {
+            var parameters = listener.GetParameters();
+
+            object[] arguments = null;
+
+            if (parameters.Length > 0)
+            {
+                arguments = new object[parameters.Length];
+
+                for (var index = 0; index < parameters.Length; index++)
+                {
+                    var parameter = parameters[index];
+
+                    var parameterName = parameter.Name;
+
+                    if (!context.ContainsKey(parameterName))
+                    {
+                        var paramaterType = parameter.ParameterType;
+
+                        bool canBeNull = !paramaterType.IsValueType || (Nullable.GetUnderlyingType(paramaterType) != null);
+
+                        if (!canBeNull)
+                        {
+                            throw new Exception("Unable to find value in context for unnullable type");
+                        }
+
+                        continue;
+                    }
+
+                    arguments[index] = context[parameterName];
+                }
+            }
+
+            return arguments;
         }
     }
 }
