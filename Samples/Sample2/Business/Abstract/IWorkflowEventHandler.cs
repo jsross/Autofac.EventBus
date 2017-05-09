@@ -1,7 +1,7 @@
 ﻿using Core.EventManager.Configuration.Attributes;
-using Sample1.Models;
+using Sample2.Models;
 
-namespace Sample1.Business.Abstract
+namespace Sample2.Business.Abstract
 {
     public interface IWorkflowEventHandler
     {

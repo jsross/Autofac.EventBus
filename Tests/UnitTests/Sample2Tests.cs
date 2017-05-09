@@ -1,13 +1,14 @@
 ﻿using NUnit.Framework;
 using System.Linq;
 using Autofac;
-using Sample1.Business.Abstract;
-using Sample1.Models;
+using Sample2.Config;
+using Sample2.Business.Abstract;
+using Sample2.Models;
 
 namespace UnitTests
 {
     [TestFixture]
-    public class TestClass
+    public class Sample2Tests
     {
         [Test]
         public void TestMethod()

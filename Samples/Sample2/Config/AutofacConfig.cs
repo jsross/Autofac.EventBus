@@ -2,11 +2,11 @@
 using Autofac.Extras.DynamicProxy;
 using Core;
 using Core.EventManagement.Configuration;
-using Sample1.Business.Abstract;
-using Sample1.Business.Concrete;
+using Sample2.Business.Abstract;
+using Sample2.Business.Concrete;
 using System.Reflection;
 
-namespace UnitTests
+namespace Sample2.Config
 {
     public class AutofacConfig
     {
@@ -32,7 +32,7 @@ namespace UnitTests
                    .As<IMultiStepTaskNotificationManager>()
                    .InstancePerLifetimeScope();
 
-            builder.RegisterModule(new WorkflowModule(Assembly.Load("Sample1")));
+            builder.RegisterModule(new WorkflowModule(Assembly.Load("Sample2")));
 
             var container = builder.Build();
 

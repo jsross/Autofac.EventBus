@@ -1,8 +1,8 @@
-﻿using Sample1.Business.Abstract;
-using Sample1.Models;
+﻿using Sample2.Business.Abstract;
+using Sample2.Models;
 using System;
 
-namespace Sample1.Business.Concrete
+namespace Sample2.Business.Concrete
 {
     public class MultiStepTaskNotificationManager : IMultiStepTaskNotificationManager
     {

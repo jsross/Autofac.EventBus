@@ -1,4 +1,4 @@
-﻿namespace Sample1.Models
+﻿namespace Sample2.Models
 {
     public static class EventRefKeys
     {

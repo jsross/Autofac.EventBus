@@ -1,10 +1,10 @@
 ﻿using Autofac.Extras.DynamicProxy;
 using Core.EventManagement.Infrastructure;
 using Core.EventManager.Configuration.Attributes;
-using Sample1.Business.Abstract;
-using Sample1.Models;
+using Sample2.Business.Abstract;
+using Sample2.Models;
 
-namespace Sample1.Business.Concrete
+namespace Sample2.Business.Concrete
 {
     [Intercept(typeof(EventPublisherInterceptor))]
     public class WorkItemManager : IWorkItemManager

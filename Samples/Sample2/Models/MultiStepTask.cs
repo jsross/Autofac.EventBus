@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sample1.Models
+namespace Sample2.Models
 {
     public class MultiStepTask
     {
