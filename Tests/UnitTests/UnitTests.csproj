@@ -59,9 +59,9 @@
       <Project>{1252c04b-092f-4a88-ba59-8f28f46fe86e}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Sample1\Sample1.csproj">
+    <ProjectReference Include="..\..\Samples\Sample2\Sample2.csproj">
       <Project>{9cf65e13-c64c-419b-8e22-634dcc9e68d6}</Project>
-      <Name>Sample1</Name>
+      <Name>Sample2</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
