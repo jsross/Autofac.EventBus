@@ -8,11 +8,11 @@ namespace Core.EventManagement.Configuration
     public class WorkflowModule : Autofac.Module
     {
         private Assembly[] _assemblies;
+        private IListenerRegistry _listenerRegistry;
 
         public WorkflowModule(params Assembly[] assemblies)
         {
             _assemblies = assemblies;
-            var x = ListenerRegistryConfigurator.Configure(assemblies);
         }
 
         protected override void Load(ContainerBuilder builder)
