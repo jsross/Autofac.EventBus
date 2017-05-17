@@ -1,9 +1,8 @@
 ﻿using Autofac;
+using Autofac.EventManagement.Configuration;
 using Autofac.Extras.DynamicProxy;
-using Core.EventManagement.Configuration;
 using Sample1.Business.Abstract;
 using Sample1.Business.Concrete;
-using System.Reflection;
 
 namespace Sample1.Config
 {

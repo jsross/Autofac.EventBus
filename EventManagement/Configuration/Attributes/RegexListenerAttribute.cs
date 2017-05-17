@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Core.EventManager.Configuration.Attributes
+namespace Autofac.EventManagement.Configuration.Attributes
 {
     public class RegexListenerAttribute : EventListenerAttribute
     {

@@ -1,4 +1,4 @@
-﻿using Core.EventManager.Configuration.Attributes;
+﻿using Autofac.EventManagement.Configuration.Attributes;
 
 namespace Sample1.Business.Concrete
 {

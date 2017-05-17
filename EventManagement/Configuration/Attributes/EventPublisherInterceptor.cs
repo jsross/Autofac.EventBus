@@ -1,7 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Core.EventManagement.Infrastructure;
 
-namespace Core.EventManager.Configuration.Attributes
+namespace Autofac.EventManagement.Configuration.Attributes
 {
     public class EventPublisherInterceptor : IInterceptor
     {

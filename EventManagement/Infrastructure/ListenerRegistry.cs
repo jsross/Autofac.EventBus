@@ -1,10 +1,10 @@
-﻿using Core.EventManager.Configuration.Attributes;
+﻿using Autofac.EventManagement.Configuration.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Caching;
 
-namespace Core.EventManagement.Infrastructure
+namespace Autofac.EventManagement.Infrastructure
 {
     public class ListenerRegistry : IListenerRegistry
     {

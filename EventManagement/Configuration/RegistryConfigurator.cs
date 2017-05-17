@@ -1,9 +1,10 @@
-﻿using Core.EventManagement.Infrastructure;
-using Core.EventManager.Configuration.Attributes;
+﻿using Autofac.EventManagement.Configuration.Attributes;
+using Autofac.EventManagement.Infrastructure;
+using Core.EventManagement.Infrastructure;
 using System.Linq;
 using System.Reflection;
 
-namespace Core.EventManagement.Configuration
+namespace Autofac.EventManagement.Configuration
 {
     public static class ListenerRegistryConfigurator
     {

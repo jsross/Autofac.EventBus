@@ -1,11 +1,11 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac.EventManagement.Infrastructure;
+using Autofac.EventManagement.Configuration.Attributes;
 using Core.EventManagement.Infrastructure;
-using Core.EventManager.Configuration.Attributes;
-using System.Reflection;
 
-namespace Core.EventManagement.Configuration
+namespace Autofac.EventManagement.Configuration
 {
-    public class WorkflowModule : Autofac.Module
+    public class WorkflowModule : Module
     {
         private Assembly[] _assemblies;
         private IListenerRegistry _listenerRegistry;

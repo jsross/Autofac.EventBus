@@ -1,5 +1,6 @@
 ﻿using Autofac;
-using Core.EventManagement.Models;
+using Autofac.EventManagement.Infrastructure;
+using Autofac.EventManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
