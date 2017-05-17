@@ -7,8 +7,8 @@
     <ProjectGuid>{1252C04B-092F-4A88-BA59-8F28F46FE86E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
+    <RootNamespace>Autofac.EventManagement</RootNamespace>
+    <AssemblyName>Autofac.EventManagement</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

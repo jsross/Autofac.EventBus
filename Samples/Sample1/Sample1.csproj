@@ -63,9 +63,9 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Core.csproj">
+    <ProjectReference Include="..\..\EventManagement\EventManagement.csproj">
       <Project>{1252c04b-092f-4a88-ba59-8f28f46fe86e}</Project>
-      <Name>Core</Name>
+      <Name>EventManagement</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
