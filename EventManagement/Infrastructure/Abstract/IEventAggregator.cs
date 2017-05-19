@@ -1,6 +1,6 @@
-﻿namespace Core.EventManagement.Infrastructure
+﻿namespace Autofac.EventManagement.Infrastructure.Abstract
 {
-    public interface IEventHub
+    public interface IEventAggregator
     {
         void Enqueue(string @event, object context = null);
 

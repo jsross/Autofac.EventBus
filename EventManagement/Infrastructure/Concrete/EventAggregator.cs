@@ -1,13 +1,12 @@
-﻿using Autofac;
-using Autofac.EventManagement.Infrastructure;
+﻿using Autofac.EventManagement.Infrastructure.Abstract;
 using Autofac.EventManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Core.EventManagement.Infrastructure
+namespace Autofac.EventManagement.Infrastructure.Concrete
 {
-    public class EventHub : IEventHub
+    public class EventAggregator : IEventAggregator
     {
         private const string EVENT_CONTEXT_KEY = "event";
 
@@ -18,7 +17,7 @@ namespace Core.EventManagement.Infrastructure
 
         private bool _inProcess = false;
 
-        public EventHub(IListenerRegistry registry, ILifetimeScope scope)
+        public EventAggregator(IListenerRegistry registry, ILifetimeScope scope)
         {
             _registry = registry;
             _scope = scope;

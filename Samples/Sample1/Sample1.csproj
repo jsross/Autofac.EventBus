@@ -53,9 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\Abstract\IManager.cs" />
-    <Compile Include="Business\Concrete\EventHandler.cs" />
-    <Compile Include="Business\Concrete\Manager.cs" />
+    <Compile Include="Business\EventHandler.cs" />
+    <Compile Include="Business\Manager.cs" />
     <Compile Include="Config\AutofacConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

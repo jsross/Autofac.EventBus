@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using NUnit.Framework;
-using Sample1.Business.Abstract;
+using Sample1.Business;
 using Sample1.Config;
 
 namespace UnitTests
@@ -15,9 +15,11 @@ namespace UnitTests
 
             ILifetimeScope scope = container.BeginLifetimeScope();
 
-            var manager = scope.Resolve<IManager>();
+            var manager = scope.Resolve<Manager>();
 
             manager.DoSomething();
+
+            Assert.IsTrue(EventHandler.SomethingHappened);
         }
     }
 }

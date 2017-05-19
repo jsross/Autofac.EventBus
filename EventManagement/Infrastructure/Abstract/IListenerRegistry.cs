@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Autofac.EventManagement.Infrastructure
+namespace Autofac.EventManagement.Infrastructure.Abstract
 {
     public interface IListenerRegistry
     {

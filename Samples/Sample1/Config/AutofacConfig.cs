@@ -1,8 +1,7 @@
 ﻿using Autofac;
 using Autofac.EventManagement.Configuration;
 using Autofac.Extras.DynamicProxy;
-using Sample1.Business.Abstract;
-using Sample1.Business.Concrete;
+using Sample1.Business;
 
 namespace Sample1.Config
 {
@@ -14,8 +13,7 @@ namespace Sample1.Config
 
             //Register the publishing class
             builder.RegisterType<Manager>()
-                   .As<IManager>()
-                   .EnableInterfaceInterceptors();
+                   .EnableClassInterceptors();
 
             //Register the listening class
             builder.RegisterType<EventHandler>();

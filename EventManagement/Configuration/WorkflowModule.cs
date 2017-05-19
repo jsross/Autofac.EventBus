@@ -1,34 +1,30 @@
 ﻿using System.Reflection;
-using Autofac.EventManagement.Infrastructure;
 using Autofac.EventManagement.Configuration.Attributes;
-using Core.EventManagement.Infrastructure;
+using Autofac.EventManagement.Infrastructure.Abstract;
+using Autofac.EventManagement.Infrastructure.Concrete;
 
 namespace Autofac.EventManagement.Configuration
 {
     public class WorkflowModule : Module
     {
-        private Assembly[] _assemblies;
         private IListenerRegistry _listenerRegistry;
 
         public WorkflowModule(params Assembly[] assemblies)
         {
-            _assemblies = assemblies;
+            _listenerRegistry = ListenerRegistryConfigurator.Configure(assemblies);
         }
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<EventPublisherInterceptor>()
-                   .InstancePerLifetimeScope();
+            builder.RegisterType<EventPublisherInterceptor>();
 
-            builder.RegisterType<EventHub>()
-                   .As<IEventHub>()
+            builder.RegisterType<EventAggregator>()
+                   .As<IEventAggregator>()
                    .InstancePerLifetimeScope();
 
             builder.Register((e) =>
             {
-                var registry = ListenerRegistryConfigurator.Configure(_assemblies);
-
-                return registry;
+                return _listenerRegistry;
             })
             .SingleInstance();
         }

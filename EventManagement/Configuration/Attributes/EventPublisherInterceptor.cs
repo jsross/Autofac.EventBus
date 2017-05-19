@@ -1,13 +1,13 @@
-﻿using Castle.DynamicProxy;
-using Core.EventManagement.Infrastructure;
+﻿using Autofac.EventManagement.Infrastructure.Abstract;
+using Castle.DynamicProxy;
 
 namespace Autofac.EventManagement.Configuration.Attributes
 {
     public class EventPublisherInterceptor : IInterceptor
     {
-        private IEventHub _eventManager;
+        private IEventAggregator _eventManager;
 
-        public EventPublisherInterceptor(IEventHub eventManager)
+        public EventPublisherInterceptor(IEventAggregator eventManager)
         {
             _eventManager = eventManager;
         }

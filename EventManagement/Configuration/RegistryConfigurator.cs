@@ -1,6 +1,6 @@
 ﻿using Autofac.EventManagement.Configuration.Attributes;
-using Autofac.EventManagement.Infrastructure;
-using Core.EventManagement.Infrastructure;
+using Autofac.EventManagement.Infrastructure.Abstract;
+using Autofac.EventManagement.Infrastructure.Concrete;
 using System.Linq;
 using System.Reflection;
 

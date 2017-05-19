@@ -1,6 +1,6 @@
 ﻿using Autofac.EventManagement.Configuration.Attributes;
+using Autofac.EventManagement.Infrastructure.Abstract;
 using Autofac.Extras.DynamicProxy;
-using Core.EventManagement.Infrastructure;
 using Sample2.Business.Abstract;
 using Sample2.Models;
 
@@ -9,9 +9,9 @@ namespace Sample2.Business.Concrete
     [Intercept(typeof(EventPublisherInterceptor))]
     public class MultiStepTaskManager : IMultiStepTaskManager
     {
-        private IEventHub _eventManager;
+        private IEventAggregator _eventManager;
 
-        public MultiStepTaskManager(IEventHub eventManager)
+        public MultiStepTaskManager(IEventAggregator eventManager)
         {
             _eventManager = eventManager;
         }
