@@ -18,8 +18,8 @@ namespace Autofac.EventManagement.Configuration
         {
             builder.RegisterType<EventPublisherInterceptor>();
 
-            builder.RegisterType<EventAggregator>()
-                   .As<IEventAggregator>()
+            builder.RegisterType<EventBus>()
+                   .As<IEventBus>()
                    .InstancePerLifetimeScope();
 
             builder.Register((e) =>

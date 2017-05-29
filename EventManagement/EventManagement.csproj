@@ -56,9 +56,9 @@
   <ItemGroup>
     <Compile Include="Configuration\Attributes\EventListenerAttribute.cs" />
     <Compile Include="Configuration\Attributes\StringMatchListenerAttribute.cs" />
-    <Compile Include="Infrastructure\Abstract\IEventAggregator.cs" />
+    <Compile Include="Infrastructure\Abstract\IEventBus.cs" />
     <Compile Include="Infrastructure\Abstract\IListenerRegistry.cs" />
-    <Compile Include="Infrastructure\Concrete\EventAggregator.cs" />
+    <Compile Include="Infrastructure\Concrete\EventBus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Configuration\Attributes\RegexListenerAttribute.cs" />

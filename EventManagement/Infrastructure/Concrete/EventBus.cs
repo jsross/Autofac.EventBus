@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Autofac.EventManagement.Infrastructure.Concrete
 {
-    public class EventAggregator : IEventAggregator
+    public class EventBus : IEventBus
     {
         private const string EVENT_CONTEXT_KEY = "event";
 
@@ -17,7 +17,7 @@ namespace Autofac.EventManagement.Infrastructure.Concrete
 
         private bool _inProcess = false;
 
-        public EventAggregator(IListenerRegistry registry, ILifetimeScope scope)
+        public EventBus(IListenerRegistry registry, ILifetimeScope scope)
         {
             _registry = registry;
             _scope = scope;
@@ -25,7 +25,7 @@ namespace Autofac.EventManagement.Infrastructure.Concrete
             _entries = new Queue<Event>();
         }
          
-        public void Enqueue(string @event, object context = null)
+        public void Post(string @event, object context = null)
         {
             Dictionary<string, object> dictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
 

@@ -1,8 +1,8 @@
 ﻿namespace Autofac.EventManagement.Infrastructure.Abstract
 {
-    public interface IEventAggregator
+    public interface IEventBus
     {
-        void Enqueue(string @event, object context = null);
+        void Post(string @event, object context = null);
 
         void ProcessQueue();
     }

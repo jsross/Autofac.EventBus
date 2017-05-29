@@ -5,18 +5,18 @@ namespace Autofac.EventManagement.Configuration.Attributes
 {
     public class EventPublisherInterceptor : IInterceptor
     {
-        private IEventAggregator _eventManager;
+        private IEventBus _eventBus;
 
-        public EventPublisherInterceptor(IEventAggregator eventManager)
+        public EventPublisherInterceptor(IEventBus eventBus)
         {
-            _eventManager = eventManager;
+            _eventBus = eventBus;
         }
 
         public void Intercept(IInvocation invocation)
         {
             invocation.Proceed();
 
-            _eventManager.ProcessQueue();
+            _eventBus.ProcessQueue();
         }
     }
 }

@@ -9,11 +9,11 @@ namespace Sample2.Business.Concrete
     [Intercept(typeof(EventPublisherInterceptor))]
     public class MultiStepTaskManager : IMultiStepTaskManager
     {
-        private IEventAggregator _eventManager;
+        private IEventBus _eventBus;
 
-        public MultiStepTaskManager(IEventAggregator eventManager)
+        public MultiStepTaskManager(IEventBus eventBus)
         {
-            _eventManager = eventManager;
+            _eventBus = eventBus;
         }
 
         public MultiStepTask Create()
@@ -27,7 +27,7 @@ namespace Sample2.Business.Concrete
             multiStepTask.WorkItems.Add(new WorkItem { Status = WorkItemStatus.Created, MultiStepTask = multiStepTask });
             multiStepTask.WorkItems.Add(new WorkItem { Status = WorkItemStatus.Created, MultiStepTask = multiStepTask });
 
-            _eventManager.Enqueue(EventRefKeys.PROCESS_CREATED, new { multiStepTask = multiStepTask });
+            _eventBus.Post(EventRefKeys.PROCESS_CREATED, new { multiStepTask = multiStepTask });
 
             return multiStepTask;
         }
@@ -36,21 +36,21 @@ namespace Sample2.Business.Concrete
         {
             multiStepTask.Status = MultiStepTaskStatus.InProgress;
 
-            _eventManager.Enqueue(EventRefKeys.PROCESS_STARTED, new { multiStepTask = multiStepTask });
+            _eventBus.Post(EventRefKeys.PROCESS_STARTED, new { multiStepTask = multiStepTask });
         }
 
         public void Complete(MultiStepTask multiStepTask)
         {
             multiStepTask.Status = MultiStepTaskStatus.Completed;
 
-            _eventManager.Enqueue(EventRefKeys.PROCESS_COMPLETED, new { multiStepTask = multiStepTask });
+            _eventBus.Post(EventRefKeys.PROCESS_COMPLETED, new { multiStepTask = multiStepTask });
         }
 
         public void Cancel(MultiStepTask multiStepTask)
         {
             multiStepTask.Status = MultiStepTaskStatus.Cancelled;
 
-            _eventManager.Enqueue(EventRefKeys.PROCESS_CANCELLED, new { multiStepTask = multiStepTask });
+            _eventBus.Post(EventRefKeys.PROCESS_CANCELLED, new { multiStepTask = multiStepTask });
         }
     }
 }

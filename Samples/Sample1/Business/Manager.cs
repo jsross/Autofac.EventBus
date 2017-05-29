@@ -7,18 +7,18 @@ namespace Sample1.Business
     [Intercept(typeof(EventPublisherInterceptor))]
     public class Manager
     {
-        private IEventAggregator _eventAggregator;
+        private IEventBus _eventBus;
 
-        public Manager(IEventAggregator eventAggregator)
+        public Manager(IEventBus eventBus)
         {
-            _eventAggregator = eventAggregator;
+            _eventBus = eventBus;
         }
 
         public virtual void DoSomething()
         {
             //Do some stuff
 
-            _eventAggregator.Enqueue("SomeEvent");
+            _eventBus.Post("SomeEvent");
         }
     }
 }
