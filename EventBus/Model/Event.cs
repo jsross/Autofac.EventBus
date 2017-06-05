@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Autofac.EventManagement.Models
+namespace Autofac.EventBus.Models
 {
     public class Event
     {

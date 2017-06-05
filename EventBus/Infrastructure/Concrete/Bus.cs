@@ -1,12 +1,12 @@
-﻿using Autofac.EventManagement.Infrastructure.Abstract;
-using Autofac.EventManagement.Models;
+﻿using Autofac.EventBus.Infrastructure.Abstract;
+using Autofac.EventBus.Models;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Autofac.EventManagement.Infrastructure.Concrete
+namespace Autofac.EventBus.Infrastructure.Concrete
 {
-    public class EventBus : IEventBus
+    public class Bus : IBus
     {
         private const string EVENT_CONTEXT_KEY = "event";
 
@@ -17,7 +17,7 @@ namespace Autofac.EventManagement.Infrastructure.Concrete
 
         private bool _inProcess = false;
 
-        public EventBus(IListenerRegistry registry, ILifetimeScope scope)
+        public Bus(IListenerRegistry registry, ILifetimeScope scope)
         {
             _registry = registry;
             _scope = scope;

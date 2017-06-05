@@ -1,5 +1,5 @@
-﻿using Autofac.EventManagement.Configuration.Attributes;
-using Autofac.EventManagement.Infrastructure.Abstract;
+﻿using Autofac.EventBus.Configuration.Attributes;
+using Autofac.EventBus.Infrastructure.Abstract;
 using Autofac.Extras.DynamicProxy;
 
 namespace Sample1.Business
@@ -7,18 +7,18 @@ namespace Sample1.Business
     [Intercept(typeof(EventPublisherInterceptor))]
     public class Manager
     {
-        private IEventBus _eventBus;
+        private IBus _bus;
 
-        public Manager(IEventBus eventBus)
+        public Manager(IBus bus)
         {
-            _eventBus = eventBus;
+            _bus = bus;
         }
 
         public virtual void DoSomething()
         {
             //Do some stuff
 
-            _eventBus.Post("SomeEvent");
+            _bus.Post("SomeEvent");
         }
     }
 }

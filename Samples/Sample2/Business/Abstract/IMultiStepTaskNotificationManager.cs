@@ -1,4 +1,4 @@
-﻿using Autofac.EventManagement.Configuration.Attributes;
+﻿using Autofac.EventBus.Configuration.Attributes;
 using Sample2.Models;
 
 namespace Sample2.Business.Abstract

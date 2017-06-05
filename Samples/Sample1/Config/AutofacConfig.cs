@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Autofac.EventManagement.Configuration;
+using Autofac.EventBus.Configuration;
 using Autofac.Extras.DynamicProxy;
 using Sample1.Business;
 
@@ -20,7 +20,7 @@ namespace Sample1.Config
 
             //Register the WorkflowModule with the assembly that contains the listening class
             //This will also register the EventPublisherInterceptor and the IEventHub
-            builder.RegisterModule(new WorkflowModule(typeof(EventHandler).Assembly));
+            builder.RegisterModule(new ConfigModule(typeof(EventHandler).Assembly));
 
             var container = builder.Build();
 

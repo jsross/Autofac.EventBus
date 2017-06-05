@@ -70,9 +70,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EventManagement\EventManagement.csproj">
+    <ProjectReference Include="..\..\EventBus\EventBus.csproj">
       <Project>{1252c04b-092f-4a88-ba59-8f28f46fe86e}</Project>
-      <Name>EventManagement</Name>
+      <Name>EventBus</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

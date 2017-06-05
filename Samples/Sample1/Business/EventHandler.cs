@@ -1,4 +1,4 @@
-﻿using Autofac.EventManagement.Configuration.Attributes;
+﻿using Autofac.EventBus.Configuration.Attributes;
 
 namespace Sample1.Business
 {

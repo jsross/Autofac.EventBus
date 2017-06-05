@@ -1,6 +1,6 @@
-﻿namespace Autofac.EventManagement.Infrastructure.Abstract
+﻿namespace Autofac.EventBus.Infrastructure.Abstract
 {
-    public interface IEventBus
+    public interface IBus
     {
         void Post(string @event, object context = null);
 

@@ -1,8 +1,8 @@
-﻿using Autofac.EventManagement.Configuration.Attributes;
+﻿using Autofac.EventBus.Configuration.Attributes;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Autofac.EventManagement.Infrastructure.Abstract
+namespace Autofac.EventBus.Infrastructure.Abstract
 {
     public interface IListenerRegistry
     {

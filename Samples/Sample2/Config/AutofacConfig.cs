@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using Autofac.EventManagement.Configuration;
+using Autofac.EventBus.Configuration;
 using Autofac.Extras.DynamicProxy;
 using Sample2.Business.Abstract;
 using Sample2.Business.Concrete;
@@ -31,7 +31,7 @@ namespace Sample2.Config
                    .As<IMultiStepTaskNotificationManager>()
                    .InstancePerLifetimeScope();
 
-            builder.RegisterModule(new WorkflowModule(Assembly.Load("Sample2")));
+            builder.RegisterModule(new ConfigModule(Assembly.Load("Sample2")));
 
             var container = builder.Build();
 

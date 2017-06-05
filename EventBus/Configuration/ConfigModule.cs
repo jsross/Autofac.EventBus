@@ -1,15 +1,15 @@
 ﻿using System.Reflection;
-using Autofac.EventManagement.Configuration.Attributes;
-using Autofac.EventManagement.Infrastructure.Abstract;
-using Autofac.EventManagement.Infrastructure.Concrete;
+using Autofac.EventBus.Configuration.Attributes;
+using Autofac.EventBus.Infrastructure.Abstract;
+using Autofac.EventBus.Infrastructure.Concrete;
 
-namespace Autofac.EventManagement.Configuration
+namespace Autofac.EventBus.Configuration
 {
-    public class WorkflowModule : Module
+    public class ConfigModule : Module
     {
         private IListenerRegistry _listenerRegistry;
 
-        public WorkflowModule(params Assembly[] assemblies)
+        public ConfigModule(params Assembly[] assemblies)
         {
             _listenerRegistry = ListenerRegistryConfigurator.Configure(assemblies);
         }
@@ -18,8 +18,8 @@ namespace Autofac.EventManagement.Configuration
         {
             builder.RegisterType<EventPublisherInterceptor>();
 
-            builder.RegisterType<EventBus>()
-                   .As<IEventBus>()
+            builder.RegisterType<Bus>()
+                   .As<IBus>()
                    .InstancePerLifetimeScope();
 
             builder.Register((e) =>

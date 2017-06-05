@@ -1,13 +1,13 @@
-﻿using Autofac.EventManagement.Infrastructure.Abstract;
+﻿using Autofac.EventBus.Infrastructure.Abstract;
 using Castle.DynamicProxy;
 
-namespace Autofac.EventManagement.Configuration.Attributes
+namespace Autofac.EventBus.Configuration.Attributes
 {
     public class EventPublisherInterceptor : IInterceptor
     {
-        private IEventBus _eventBus;
+        private IBus _eventBus;
 
-        public EventPublisherInterceptor(IEventBus eventBus)
+        public EventPublisherInterceptor(IBus eventBus)
         {
             _eventBus = eventBus;
         }

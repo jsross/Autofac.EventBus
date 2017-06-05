@@ -1,11 +1,11 @@
-﻿using Autofac.EventManagement.Configuration.Attributes;
-using Autofac.EventManagement.Infrastructure.Abstract;
+﻿using Autofac.EventBus.Configuration.Attributes;
+using Autofac.EventBus.Infrastructure.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Caching;
 
-namespace Autofac.EventManagement.Infrastructure.Concrete
+namespace Autofac.EventBus.Infrastructure.Concrete
 {
     public class ListenerRegistry : IListenerRegistry
     {
