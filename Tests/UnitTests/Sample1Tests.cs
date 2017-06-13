@@ -8,14 +8,20 @@ namespace UnitTests
     [TestFixture]
     public class Sample1Tests
     {
-        [Test]
-        public void TestMethod()
+        private ILifetimeScope _scope;
+
+        [SetUp]
+        public void Init()
         {
             var container = AutofacConfig.Configure();
 
-            ILifetimeScope scope = container.BeginLifetimeScope();
+            _scope = container.BeginLifetimeScope();
+        }
 
-            var manager = scope.Resolve<Manager>();
+        [Test]
+        public void TestMethod()
+        {
+            var manager = _scope.Resolve<Manager>();
 
             manager.DoSomething();
 

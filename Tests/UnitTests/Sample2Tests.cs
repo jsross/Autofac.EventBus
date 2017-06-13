@@ -10,15 +10,21 @@ namespace UnitTests
     [TestFixture]
     public class Sample2Tests
     {
-        [Test]
-        public void TestMethod()
+        private ILifetimeScope _scope;
+
+        [SetUp]
+        public void Init()
         {
             var container = AutofacConfig.Configure();
 
-            ILifetimeScope scope = container.BeginLifetimeScope();
+            _scope = container.BeginLifetimeScope();
+        }
 
-            var processManager = scope.Resolve<IMultiStepTaskManager>();
-            var workItemManager = scope.Resolve<IWorkItemManager>();
+        [Test]
+        public void TestMethod()
+        {
+            var processManager = _scope.Resolve<IMultiStepTaskManager>();
+            var workItemManager = _scope.Resolve<IWorkItemManager>();
 
             var multiStepTask = processManager.Create();
 

@@ -1,43 +1,43 @@
-﻿using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Infrastructure.Abstract;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Caching;
+using Autofac.EventBus.Configuration.Attributes;
+using Autofac.EventBus.Infrastructure.Abstract;
+using Autofac.EventManagement.Model;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {
     public class ListenerRegistry : IListenerRegistry
     {
-        private List<Tuple<EventListenerAttribute, MethodInfo>> _entries;
+        private List<Listener> _listeners;
         private MemoryCache _cache;
 
         public ListenerRegistry()
         {
-            _entries = new List<Tuple<EventListenerAttribute, MethodInfo>>();
+            _listeners = new List<Listener>();
             _cache = new MemoryCache("RegistryCache");
         }
 
         public void Register(EventListenerAttribute attribute, MethodInfo method)
         {
-            _entries.Add(new Tuple<EventListenerAttribute, MethodInfo>(attribute, method));
+            var listener = new Listener(attribute.DoesEventNameMatch, method);
+
+            _listeners.Add(listener);
         }
 
-        public List<MethodInfo> GetListeners(string eventName)
+        public List<Listener> GetListeners(string eventName)
         {
             lock(_cache)
             {
                 if (!_cache.Contains(eventName))
                 {
-                    List<MethodInfo> listeners = new List<MethodInfo>();
+                    var listeners = new List<Listener>();
 
-                    foreach (var item in _entries)
+                    foreach (var listener in _listeners)
                     {
-                        var attribute = item.Item1;
-
-                        if (attribute.DoesEventNameMatch(eventName))
+                        if (listener.DoesItMatch(eventName))
                         {
-                            listeners.Add(item.Item2);
+                            listeners.Add(listener);
                         }
                     }
 
@@ -47,7 +47,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
                 }
             }
 
-            var result = _cache.Get(eventName) as List<MethodInfo>;
+            var result = _cache.Get(eventName) as List<Listener>;
 
             return result;
         }

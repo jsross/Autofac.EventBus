@@ -59,6 +59,7 @@
     <Compile Include="Infrastructure\Abstract\IBus.cs" />
     <Compile Include="Infrastructure\Abstract\IListenerRegistry.cs" />
     <Compile Include="Infrastructure\Concrete\Bus.cs" />
+    <Compile Include="Model\Listener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Configuration\Attributes\RegexListenerAttribute.cs" />

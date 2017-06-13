@@ -1,8 +1,9 @@
-﻿using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Models;
-using System;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
+using Autofac.EventBus.Infrastructure.Abstract;
+using Autofac.EventBus.Models;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {
@@ -10,7 +11,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
     {
         private const string EVENT_CONTEXT_KEY = "event";
 
-        private Queue<Event> _entries;
+        private ConcurrentQueue<Event> _eventQueue;
 
         private IListenerRegistry _registry;
         private ILifetimeScope _scope;
@@ -22,7 +23,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             _registry = registry;
             _scope = scope;
 
-            _entries = new Queue<Event>();
+            _eventQueue = new ConcurrentQueue<Event>();
         }
          
         public void Post(string @event, object context = null)
@@ -58,16 +59,16 @@ namespace Autofac.EventBus.Infrastructure.Concrete
                 Context = dictionary
             };
             
-            _entries.Enqueue(entry);
+            _eventQueue.Enqueue(entry);
         }
 
         public void ProcessQueue()
         {
-            while(_entries.Count > 0)
-            {
-                var entry = _entries.Dequeue();
+            Event @event;
 
-                ProcessEvent(entry);
+            while (_eventQueue.TryDequeue(out @event))
+            {
+                ProcessEvent(@event);
             }
         }
 
@@ -85,22 +86,24 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             {
                 object instance = null;
 
-                var resolved = _scope.TryResolve(listener.DeclaringType, out instance);
+                var targetMethod = listener.TargetMethod;
+
+                var resolved = _scope.TryResolve(targetMethod.DeclaringType, out instance);
 
                 if (!resolved)
                     continue;
 
-                var arguments = MapArguments(listener, context);
+                var arguments = MapArguments(targetMethod, context);
 
-                listener.Invoke(instance, arguments);
+                targetMethod.Invoke(instance, arguments);
             }
 
             _inProcess = false;
         }
 
-        private object[] MapArguments(MethodInfo listener, Dictionary<string, object> context)
+        private object[] MapArguments(MethodInfo targetMethod, Dictionary<string, object> context)
         {
-            var parameters = listener.GetParameters();
+            var parameters = targetMethod.GetParameters();
 
             object[] arguments = null;
 
