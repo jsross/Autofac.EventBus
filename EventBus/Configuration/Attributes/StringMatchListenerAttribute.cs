@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Autofac.EventBus.Models;
 
 namespace Autofac.EventBus.Configuration.Attributes
 {
     public class StringMatchListenerAttribute : EventListenerAttribute
     {
-        private string[] _toMatch;
+        private readonly string[] _toMatch;
 
         public StringMatchListenerAttribute(params string[] toMatch)
         {
@@ -17,9 +18,10 @@ namespace Autofac.EventBus.Configuration.Attributes
             _toMatch = toMatch;
         }
 
-        public override bool DoesEventNameMatch(string eventName)
+        public override bool Evaluate(Event @event)
         {
-            return _toMatch.Contains(eventName);
+            return _toMatch.Contains(@event.EventName);
         }
+
     }
 }

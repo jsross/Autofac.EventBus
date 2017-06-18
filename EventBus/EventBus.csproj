@@ -56,14 +56,16 @@
   <ItemGroup>
     <Compile Include="Configuration\Attributes\EventListenerAttribute.cs" />
     <Compile Include="Configuration\Attributes\StringMatchListenerAttribute.cs" />
+    <Compile Include="Configuration\EventMatcher.cs" />
     <Compile Include="Infrastructure\Abstract\IBus.cs" />
-    <Compile Include="Infrastructure\Abstract\IListenerRegistry.cs" />
+    <Compile Include="Infrastructure\Abstract\ISubscriberRegistry.cs" />
     <Compile Include="Infrastructure\Concrete\Bus.cs" />
-    <Compile Include="Model\Listener.cs" />
+    <Compile Include="Model\Subscriber.cs" />
+    <Compile Include="Model\SubscriberRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Configuration\Attributes\RegexListenerAttribute.cs" />
-    <Compile Include="Infrastructure\Concrete\ListenerRegistry.cs" />
+    <Compile Include="Infrastructure\Concrete\SubscriberRegistry.cs" />
     <Compile Include="Configuration\Attributes\EventPublisherInterceptor.cs" />
     <Compile Include="Configuration\RegistryConfigurator.cs" />
     <Compile Include="Configuration\ConfigModule.cs" />

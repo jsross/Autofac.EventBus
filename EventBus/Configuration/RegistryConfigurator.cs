@@ -8,9 +8,9 @@ namespace Autofac.EventBus.Configuration
 {
     public static class ListenerRegistryConfigurator
     {
-        public static IListenerRegistry Configure(params Assembly[] assembies)
+        public static ISubscriberRegistry Configure(params Assembly[] assembies)
         {
-            var registry = new ListenerRegistry();
+            var registry = new SubscriberRegistry();
 
             var methods = assembies.SelectMany(a => a.GetTypes())
                                    .SelectMany(t => t.GetMethods())

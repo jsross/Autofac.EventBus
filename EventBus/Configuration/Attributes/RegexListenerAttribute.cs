@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac.EventBus.Models;
+using System;
 using System.Text.RegularExpressions;
 
 namespace Autofac.EventBus.Configuration.Attributes
@@ -17,9 +18,9 @@ namespace Autofac.EventBus.Configuration.Attributes
             _regex = new Regex(pattern);
         }
 
-        public override bool DoesEventNameMatch(string eventName)
+        public override bool Evaluate(Event @event)
         {
-            var match = _regex.Match(eventName);
+            var match = _regex.Match(@event.EventName);
 
             return match.Success;
         }

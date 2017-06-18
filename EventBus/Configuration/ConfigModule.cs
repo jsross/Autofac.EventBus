@@ -7,7 +7,7 @@ namespace Autofac.EventBus.Configuration
 {
     public class ConfigModule : Module
     {
-        private IListenerRegistry _listenerRegistry;
+        private ISubscriberRegistry _listenerRegistry;
 
         public ConfigModule(params Assembly[] assemblies)
         {
