@@ -1,7 +1,6 @@
 ﻿using Autofac.EventBus.Models;
 using System.Reflection;
-using System.Collections.Generic;
-using System.Linq;
+using System;
 
 namespace Autofac.EventManagement.Infrastructure.Model
 {
@@ -18,33 +17,41 @@ namespace Autofac.EventManagement.Infrastructure.Model
 
         public void Invoke(Event @event)
         {
-            var arguments = MapArguments(@event.Context);
+            var arguments = MapArguments(@event.EventScope);
 
             _target.Invoke(_instance, arguments);
         }
 
-        private object[] MapArguments(Dictionary<string, object> context)
+        protected object[] MapArguments(ILifetimeScope scope)
         {
             var parameters = _target.GetParameters();
 
             object[] arguments = null;
 
-            if (parameters.Any())
+            if (parameters.Length > 0)
             {
                 arguments = new object[parameters.Length];
 
-                for(var index = 0; index < parameters.Length; index++)
+                for (var index = 0; index < parameters.Length; index++)
                 {
                     var parameter = parameters[index];
+                    var paramaterType = parameter.ParameterType;
 
-                    if (!context.ContainsKey(parameter.Name))
+                    object instance = null;
+
+                    if (!scope.TryResolve(paramaterType, out instance))
                     {
+                        bool canBeNull = !paramaterType.IsValueType || (Nullable.GetUnderlyingType(paramaterType) != null);
+
+                        if (!canBeNull)
+                        {
+                            throw new Exception("Unable to find value in context for unnullable type");
+                        }
+
                         continue;
                     }
 
-                    //TODO (JSR) check type
-
-                    arguments[index] = context[parameter.Name];
+                    arguments[index] = instance;
                 }
             }
 

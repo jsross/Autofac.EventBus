@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.Caching;
+
 using Autofac.EventBus.Configuration.Attributes;
 using Autofac.EventBus.Infrastructure.Abstract;
 using Autofac.EventBus.Models;
@@ -13,12 +12,10 @@ namespace Autofac.EventBus.Infrastructure.Concrete
     public class SubscriberRegistry : ISubscriberRegistry
     {
         private List<SubscriberRegistration> _registrations;
-        private MemoryCache _cache;
 
         public SubscriberRegistry()
         {
             _registrations = new List<SubscriberRegistration>();
-            _cache = new MemoryCache("RegistryCache");
         }
 
         public void Register(EventListenerAttribute attribute, MethodInfo method)
@@ -28,44 +25,32 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             _registrations.Add(listener);
         }
 
-        public List<Subscriber> GetSubscribers(Event @event, ILifetimeScope scope)
+        public List<Subscriber> GetSubscribers(Event @event, ILifetimeScope currentScope)
         {
-            lock(_cache)
+            var subscribers = new List<Subscriber>();
+
+            foreach (var registration in _registrations)
             {
-                if (!_cache.Contains(@event.EventName))
+                if (!registration.IsSubscribed(@event))
                 {
-                    var subscribers = new List<Subscriber>();
-
-                    foreach (var registration in _registrations)
-                    {
-                        if (!registration.IsSubscribed(@event))
-                        {
-                            continue;
-                        }
-
-                        object instance;
-
-                        var isResolved = scope.TryResolve(registration.SubscriberType, out instance);
-                        
-                        if (!isResolved)
-                        {
-                            continue;
-                        }
-
-                        var subscriber = new Subscriber(instance, registration.TargetMethod);
-
-                        subscribers.Add(subscriber);
-                    }
-
-                    var policy = new CacheItemPolicy(); //TODO (JSR) is the any point in caching? Its not known that the subscriber is using the event name as a key
-
-                    _cache.Add(@event.EventName, subscribers, policy);
+                    continue;
                 }
+
+                object instance;
+
+                var isResolved = currentScope.TryResolve(registration.SubscriberType, out instance);
+                        
+                if (!isResolved)
+                {
+                    continue;
+                }
+
+                var subscriber = new Subscriber(instance, registration.TargetMethod);
+
+                subscribers.Add(subscriber);
             }
 
-            var result = _cache.Get(@event.EventName) as List<Subscriber>;
-
-            return result;
+            return subscribers;
         }
        
     }

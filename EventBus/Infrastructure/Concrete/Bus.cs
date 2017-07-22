@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
 using Autofac.EventBus.Infrastructure.Abstract;
 using Autofac.EventBus.Models;
+using System.Linq;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {
@@ -15,65 +14,80 @@ namespace Autofac.EventBus.Infrastructure.Concrete
         private ConcurrentQueue<Event> _eventQueue;
 
         private ISubscriberRegistry _registry;
-        private ILifetimeScope _scope;
+        private ILifetimeScope _currentScope;
 
         private object _lockObject;
         private bool _inProcess = false;
 
-        public Bus(ISubscriberRegistry registry, ILifetimeScope scope)
+        public Bus(ISubscriberRegistry registry, ILifetimeScope currentScope)
         {
             _lockObject = new object();
 
             _registry = registry;
-            _scope = scope;
+            _currentScope = currentScope;
 
             _eventQueue = new ConcurrentQueue<Event>();
         }
-         
+
         public void Post(string eventName, object context = null)
         {
-            Dictionary<string, object> dictionary = MapContext(context);
-
-            dictionary[EVENT_CONTEXT_KEY] = eventName;
-
-            var entry = new Event(eventName, dictionary, CurrentEvent);
+            var @event = CreateEvent(eventName, context);
 
             lock (_lockObject)
             {
-                _eventQueue.Enqueue(entry);
+                _eventQueue.Enqueue(@event);
             }
         }
 
-        public void ProcessQueue()
+        public void Publish()
         {
-            ConcurrentQueue<Event> localQueue = null;
-             
             lock (_lockObject)
             {
                 if (_inProcess)
                     return;
 
                 _inProcess = true;
-
-                localQueue = _eventQueue;
-                _eventQueue = new ConcurrentQueue<Event>();
             }
 
+            do
+            {
+                ConcurrentQueue<Event> localQueue = null;
+
+                lock (_lockObject)
+                {
+                    localQueue = _eventQueue;
+                    _eventQueue = new ConcurrentQueue<Event>();
+                }
+
+                if (!localQueue.Any())
+                {
+                    break;
+                }
+
+                ProcessQueue(localQueue);
+            } while (true);
+
+            lock (_lockObject)
+            {
+                _inProcess = false;
+            }
+        }
+
+        private void ProcessQueue(ConcurrentQueue<Event> queue)
+        {
             Event @event;
 
-            while (localQueue.TryDequeue(out @event))
+            while (queue.TryDequeue(out @event))
             {
                 ProcessEvent(@event);
             }
-
-            _inProcess = false;
         }
 
         private void ProcessEvent(Event @event)
         {
             CurrentEvent = @event;
 
-            var subscribers = _registry.GetSubscribers(@event, _scope);
+            var subscribers = _registry.GetSubscribers(@event, _currentScope);
 
             foreach(var subscriber in subscribers)
             {
@@ -83,9 +97,11 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             CurrentEvent = null;
         }
 
-        private Dictionary<string, object> MapContext(object objectContext)
+        private Event CreateEvent(string eventName, object objectContext)
         {
-            Dictionary<string, object> dictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            var builder = new ContainerBuilder();
+
+            var @event = new Event(eventName, CurrentEvent);
 
             if (objectContext != null)
             {
@@ -95,22 +111,21 @@ namespace Autofac.EventBus.Infrastructure.Concrete
 
                 foreach (var property in properties)
                 {
-                    var propertyName = property.Name;
-
-                    if (propertyName == EVENT_CONTEXT_KEY)
-                    {
-                        throw new Exception("Cannot use property name. Reserved");
-                    }
-
                     var value = property.GetValue(objectContext);
+                    var valueType = value.GetType();
 
-                    dictionary[propertyName] = value;
+                    builder.RegisterInstance(value).As(valueType);
                 }
             }
 
-            return dictionary;
-        }
+            builder.RegisterInstance<Event>(@event);
+            
+            var container = builder.Build();
+            var scope = container.BeginLifetimeScope();
 
-        
+            @event.EventScope = scope;
+
+            return @event;
+        }
     }
 }

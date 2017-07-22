@@ -53,10 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\Abstract\IEventLog.cs" />
     <Compile Include="Business\Abstract\IMultiStepTaskManager.cs" />
     <Compile Include="Business\Abstract\IMultiStepTaskNotificationManager.cs" />
     <Compile Include="Business\Abstract\IWorkflowEventHandler.cs" />
     <Compile Include="Business\Abstract\IWorkItemManager.cs" />
+    <Compile Include="Business\Concrete\EventLog.cs" />
     <Compile Include="Business\Concrete\MultiStepTaskManager.cs" />
     <Compile Include="Business\Concrete\MultiStepTaskNotificationManager.cs" />
     <Compile Include="Business\Concrete\WorkflowEventHandler.cs" />

@@ -31,6 +31,10 @@ namespace Sample2.Config
                    .As<IMultiStepTaskNotificationManager>()
                    .InstancePerLifetimeScope();
 
+            builder.RegisterType<EventLog>()
+                   .As<IEventLog>()
+                   .InstancePerLifetimeScope();
+
             builder.RegisterModule(new ConfigModule(Assembly.Load("Sample2")));
 
             var container = builder.Build();

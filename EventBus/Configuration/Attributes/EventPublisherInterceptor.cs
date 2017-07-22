@@ -16,7 +16,7 @@ namespace Autofac.EventBus.Configuration.Attributes
         {
             invocation.Proceed();
 
-            _eventBus.ProcessQueue();
+            _eventBus.Publish();
         }
     }
 }

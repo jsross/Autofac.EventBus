@@ -1,18 +1,19 @@
 ﻿using Sample2.Business.Abstract;
 using Sample2.Models;
 using System.Linq;
+using System;
 
 namespace Sample2.Business.Concrete
 {
     public class WorkflowEventHandler : IWorkflowEventHandler
     {
-        private IMultiStepTaskManager _processManager;
+        private IMultiStepTaskManager _multiStepTaskManager;
         private IWorkItemManager _workItemManager;
 
-        public WorkflowEventHandler(IMultiStepTaskManager processManager,
+        public WorkflowEventHandler(IMultiStepTaskManager multiStepTaskManager,
                                     IWorkItemManager workItemManager)
         {
-            _processManager = processManager;
+            _multiStepTaskManager = multiStepTaskManager;
             _workItemManager = workItemManager;
         }
 
@@ -22,7 +23,7 @@ namespace Sample2.Business.Concrete
 
             if (multiStepTask.Status != MultiStepTaskStatus.InProgress)
             {
-                _processManager.Start(workItem.MultiStepTask);
+                _multiStepTaskManager.Start(workItem.MultiStepTask);
             }
         }
 
@@ -32,16 +33,21 @@ namespace Sample2.Business.Concrete
 
             if (multiStepTask.WorkItems.All(i => i.Status == WorkItemStatus.Completed))
             {
-                _processManager.Complete(multiStepTask);
+                _multiStepTaskManager.Complete(multiStepTask);
             }
         }
 
-        public void HandleProcessCancelled(MultiStepTask multiStepTask)
+        public void HandleMultiStepTaskCancelled(MultiStepTask multiStepTask)
         {
             foreach (var workItem in multiStepTask.WorkItems)
             {
                 _workItemManager.Cancelled(workItem);
             }
+        }
+
+        public void HandleMultiStepTaskCompleted(MultiStepTask multiStepTask)
+        {
+            throw new NotImplementedException();
         }
     }
 }

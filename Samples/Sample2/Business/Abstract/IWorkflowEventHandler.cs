@@ -12,6 +12,9 @@ namespace Sample2.Business.Abstract
         void HandleWorkItemCompleted(WorkItem workItem);
 
         [StringMatchListener(EventRefKeys.PROCESS_CANCELLED)]
-        void HandleProcessCancelled(MultiStepTask multiStepTask);
+        void HandleMultiStepTaskCancelled(MultiStepTask multiStepTask);
+
+        [StringMatchListener(EventRefKeys.PROCESS_COMPLETED)]
+        void HandleMultiStepTaskCompleted(MultiStepTask multiStepTask);
     }
 }

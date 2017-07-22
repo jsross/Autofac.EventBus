@@ -4,6 +4,6 @@
     {
         void Post(string @event, object context = null);
 
-        void ProcessQueue();
+        void Publish();
     }
 }
