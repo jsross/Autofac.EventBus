@@ -1,7 +1,7 @@
-﻿using System.Collections.Concurrent;
+﻿using System.Linq;
+using System.Collections.Concurrent;
 using Autofac.EventBus.Infrastructure.Abstract;
 using Autofac.EventBus.Models;
-using System.Linq;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {
@@ -31,7 +31,8 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             _eventQueue = new ConcurrentQueue<Event>();
         }
 
-        public void Post(string eventName, object context = null)
+        public void Post(string eventName,
+                         object context = null)
         {
             var @event = _eventFactory.CreateEvent(eventName, context);
 
@@ -93,7 +94,9 @@ namespace Autofac.EventBus.Infrastructure.Concrete
 
             foreach(var subscriber in subscribers)
             {
-                subscriber.Invoke(@event);
+                var arguments = @event.MapArguments(subscriber.TargetMethod);
+
+                subscriber.TargetMethod.Invoke(subscriber.Instance, arguments);
             }
 
             CurrentEvent = null;

@@ -35,6 +35,5 @@ namespace Autofac.EventBus.Infrastructure.Concrete
 
             return @event;
         }
- 
     }
 }

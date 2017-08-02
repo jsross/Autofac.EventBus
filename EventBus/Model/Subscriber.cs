@@ -6,20 +6,27 @@ namespace Autofac.EventBus.Infrastructure.Model
     public class Subscriber
     {
         private readonly object _instance;
-        private readonly MethodInfo _target;
+        private readonly MethodInfo _targetMethod;
 
-        public Subscriber(object instance, MethodInfo target)
+        public Subscriber(object instance, MethodInfo targetMethod)
         {
             _instance = instance;
-            _target = target;
+            _targetMethod = targetMethod;
         }
 
-        public void Invoke(Event @event)
+        public object Instance
         {
-            var arguments = @event.MapArguments(_target);
-
-            _target.Invoke(_instance, arguments);
+            get
+            {
+                return _instance;
+            }
         }
         
+        public MethodInfo TargetMethod {
+            get
+            {
+                return _targetMethod;
+            }
+        }
     }
 }
