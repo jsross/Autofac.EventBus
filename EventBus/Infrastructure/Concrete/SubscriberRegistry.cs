@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-
 using Autofac.EventBus.Configuration.Attributes;
 using Autofac.EventBus.Infrastructure.Abstract;
 using Autofac.EventBus.Models;
-using Autofac.EventManagement.Model;
-using Autofac.EventManagement.Infrastructure.Model;
+using Autofac.EventBus.Model;
+using Autofac.EventBus.Infrastructure.Model;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {

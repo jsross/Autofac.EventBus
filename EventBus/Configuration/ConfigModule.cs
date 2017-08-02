@@ -22,7 +22,11 @@ namespace Autofac.EventBus.Configuration
                    .As<IBus>()
                    .InstancePerLifetimeScope();
 
-            builder.RegisterInstance<ISubscriberRegistry>(_listenerRegistry);
+            builder.RegisterInstance(_listenerRegistry);
+
+            builder.RegisterType<EventFactory>()
+                   .As<IEventFactory>()
+                   .SingleInstance();
         }
     }
 }

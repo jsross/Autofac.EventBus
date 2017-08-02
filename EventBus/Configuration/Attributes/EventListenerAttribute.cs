@@ -1,5 +1,4 @@
-﻿using Autofac.EventManagement.Configuration;
-using System;
+﻿using System;
 using Autofac.EventBus.Models;
 
 namespace Autofac.EventBus.Configuration.Attributes

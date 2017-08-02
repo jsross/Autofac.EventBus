@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Autofac.EventManagement.Configuration
+namespace Autofac.EventBus.Configuration
 {
     public interface EventMatcher
     {

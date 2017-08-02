@@ -7,8 +7,8 @@
     <ProjectGuid>{1252C04B-092F-4A88-BA59-8F28F46FE86E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Autofac.EventManagement</RootNamespace>
-    <AssemblyName>Autofac.EventManagement</AssemblyName>
+    <RootNamespace>Autofac.EventBus</RootNamespace>
+    <AssemblyName>Autofac.EventBus</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -44,8 +44,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,8 +62,10 @@
     <Compile Include="Configuration\Attributes\StringMatchListenerAttribute.cs" />
     <Compile Include="Configuration\EventMatcher.cs" />
     <Compile Include="Infrastructure\Abstract\IBus.cs" />
+    <Compile Include="Infrastructure\Abstract\IEventFactory.cs" />
     <Compile Include="Infrastructure\Abstract\ISubscriberRegistry.cs" />
     <Compile Include="Infrastructure\Concrete\Bus.cs" />
+    <Compile Include="Infrastructure\Concrete\EventFactory.cs" />
     <Compile Include="Model\Subscriber.cs" />
     <Compile Include="Model\SubscriberRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

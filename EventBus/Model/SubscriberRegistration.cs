@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace Autofac.EventManagement.Model
+namespace Autofac.EventBus.Model
 {
     public class SubscriberRegistration
     {

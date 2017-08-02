@@ -7,31 +7,33 @@ namespace Autofac.EventBus.Infrastructure.Concrete
 {
     public class Bus : IBus
     {
-        private const string EVENT_CONTEXT_KEY = "event";
-
         public static Event CurrentEvent;
 
-        private ConcurrentQueue<Event> _eventQueue;
+        private readonly IEventFactory _eventFactory;
+        private readonly ILifetimeScope _currentScope;
+        private readonly ISubscriberRegistry _registry;
 
-        private ISubscriberRegistry _registry;
-        private ILifetimeScope _currentScope;
+        private ConcurrentQueue<Event> _eventQueue;
 
         private object _lockObject;
         private bool _inProcess = false;
 
-        public Bus(ISubscriberRegistry registry, ILifetimeScope currentScope)
+        public Bus(IEventFactory eventFactory,
+                   ILifetimeScope currentScope,
+                   ISubscriberRegistry registry)
         {
-            _lockObject = new object();
-
-            _registry = registry;
+            _eventFactory = eventFactory;
             _currentScope = currentScope;
+            _registry = registry;
+
+            _lockObject = new object();
 
             _eventQueue = new ConcurrentQueue<Event>();
         }
 
         public void Post(string eventName, object context = null)
         {
-            var @event = CreateEvent(eventName, context);
+            var @event = _eventFactory.CreateEvent(eventName, context);
 
             lock (_lockObject)
             {
@@ -97,35 +99,5 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             CurrentEvent = null;
         }
 
-        private Event CreateEvent(string eventName, object objectContext)
-        {
-            var builder = new ContainerBuilder();
-
-            var @event = new Event(eventName, CurrentEvent);
-
-            if (objectContext != null)
-            {
-                var type = objectContext.GetType();
-
-                var properties = type.GetProperties();
-
-                foreach (var property in properties)
-                {
-                    var value = property.GetValue(objectContext);
-                    var valueType = value.GetType();
-
-                    builder.RegisterInstance(value).As(valueType);
-                }
-            }
-
-            builder.RegisterInstance<Event>(@event);
-            
-            var container = builder.Build();
-            var scope = container.BeginLifetimeScope();
-
-            @event.EventScope = scope;
-
-            return @event;
-        }
     }
 }

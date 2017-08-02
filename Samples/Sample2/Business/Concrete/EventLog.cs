@@ -1,6 +1,6 @@
 ﻿using Sample2.Business.Abstract;
-using System;
 using Autofac.EventBus.Models;
+using System.Diagnostics;
 
 namespace Sample2.Business.Concrete
 {
@@ -8,7 +8,7 @@ namespace Sample2.Business.Concrete
     {
         public void LogEvent(Event @event)
         {
-            Console.Out.WriteLine(@event.EventName);
+            Debug.WriteLine("{0} <-- {1}", @event.EventName, @event.ParentEvent != null ? @event.ParentEvent.EventName : "");
         }
     }
 }
