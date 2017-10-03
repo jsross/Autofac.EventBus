@@ -24,7 +24,7 @@ namespace Autofac.EventBus.Configuration
 
             builder.RegisterInstance(_listenerRegistry);
 
-            builder.RegisterType<EventFactory>()
+            builder.RegisterType<ScopeBackedEventFactory>()
                    .As<IEventFactory>()
                    .SingleInstance();
         }

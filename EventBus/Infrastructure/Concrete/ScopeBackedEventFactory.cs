@@ -3,13 +3,13 @@ using Autofac.EventBus.Models;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {
-    public class EventFactory : IEventFactory
+    public class ScopeBackedEventFactory : IEventFactory
     {
         public Event CreateEvent(string eventName, object context, Event parent = null)
         {
             var builder = new ContainerBuilder();
 
-            var @event = new Event(eventName, parent);
+            var @event = new ScopeBackedEvent(eventName, parent);
 
             if (context != null)
             {
@@ -26,7 +26,8 @@ namespace Autofac.EventBus.Infrastructure.Concrete
                 }
             }
 
-            builder.RegisterInstance(@event);
+            builder.RegisterInstance(@event)
+                   .As<Event>();
 
             var container = builder.Build();
             var scope = container.BeginLifetimeScope();
