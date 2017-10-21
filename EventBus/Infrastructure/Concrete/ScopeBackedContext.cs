@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Reflection;
+using Autofac.EventBus.Infrastructure.Abstract;
 
-namespace Autofac.EventBus.Models
+namespace Autofac.EventBus.Infrastructure.Concrete
 {
-    public class ScopeBackedEvent : Event
+    public class ScopeBackedContext : IContext
     {
         private ILifetimeScope _scope;
-         
-        public ScopeBackedEvent(string eventName,
-                                Event parentEvent = null) : base(eventName, parentEvent) { }
 
-        internal ILifetimeScope EventScope
+        public ScopeBackedContext(ILifetimeScope scope)
         {
-            get { return _scope; }
-            set { _scope = value; }
+            _scope = scope;
         }
 
-        public override object[] MapArguments(MethodInfo target)
+        public object[] MapArguments(MethodInfo target)
         {
             var parameters = target.GetParameters();
 
@@ -32,7 +29,7 @@ namespace Autofac.EventBus.Models
                     var paramaterType = parameter.ParameterType;
 
                     object instance = null;
-                    
+
                     if (!_scope.TryResolve(paramaterType, out instance))
                     {
                         bool canBeNull = !paramaterType.IsValueType || (Nullable.GetUnderlyingType(paramaterType) != null);
@@ -51,6 +48,5 @@ namespace Autofac.EventBus.Models
 
             return arguments;
         }
-
     }
 }

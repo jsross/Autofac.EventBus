@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Autofac.EventBus.Infrastructure.Abstract;
+using System;
 using System.Reflection;
 
 namespace Autofac.EventBus.Models
 {
-    public abstract class Event
+    public class Event
     {
         private readonly string _eventName;
         private readonly Event _parentEvent;
@@ -18,10 +19,8 @@ namespace Autofac.EventBus.Models
         }
 
         public string EventName { get { return _eventName; } }
-
         public Event ParentEvent { get { return _parentEvent; } }
-
-        public abstract object[] MapArguments(MethodInfo target);
+        public IContext Context { get; internal set; }
 
     }
 }

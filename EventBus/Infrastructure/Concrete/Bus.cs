@@ -94,7 +94,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
 
             foreach(var subscriber in subscribers)
             {
-                var arguments = @event.MapArguments(subscriber.TargetMethod);
+                var arguments = @event.Context.MapArguments(subscriber.TargetMethod);
 
                 subscriber.TargetMethod.Invoke(subscriber.Instance, arguments);
             }

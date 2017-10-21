@@ -62,11 +62,14 @@
     <Compile Include="Configuration\Attributes\StringMatchListenerAttribute.cs" />
     <Compile Include="Configuration\EventMatcher.cs" />
     <Compile Include="Infrastructure\Abstract\IBus.cs" />
+    <Compile Include="Infrastructure\Abstract\IContext.cs" />
+    <Compile Include="Infrastructure\Abstract\IContextFactory.cs" />
     <Compile Include="Infrastructure\Abstract\IEventFactory.cs" />
     <Compile Include="Infrastructure\Abstract\ISubscriberRegistry.cs" />
+    <Compile Include="Infrastructure\Concrete\ScopeBackedContext.cs" />
     <Compile Include="Infrastructure\Concrete\Bus.cs" />
-    <Compile Include="Infrastructure\Concrete\ScopeBackedEventFactory.cs" />
-    <Compile Include="Model\ScopeBackedEvent.cs" />
+    <Compile Include="Infrastructure\Concrete\EventFactory.cs" />
+    <Compile Include="Infrastructure\Concrete\ScopedBackedContextFactory.cs" />
     <Compile Include="Model\Subscriber.cs" />
     <Compile Include="Model\SubscriberRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

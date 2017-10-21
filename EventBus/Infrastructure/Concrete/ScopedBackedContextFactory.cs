@@ -1,15 +1,18 @@
 ﻿using Autofac.EventBus.Infrastructure.Abstract;
 using Autofac.EventBus.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {
-    public class ScopeBackedEventFactory : IEventFactory
+    class ScopedBackedContextFactory : IContextFactory
     {
-        public Event CreateEvent(string eventName, object context, Event parent = null)
+        public IContext Create(Event @event, object context)
         {
             var builder = new ContainerBuilder();
-
-            var @event = new ScopeBackedEvent(eventName, parent);
 
             if (context != null)
             {
@@ -32,9 +35,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             var container = builder.Build();
             var scope = container.BeginLifetimeScope();
 
-            @event.EventScope = scope;
-
-            return @event;
+            return new ScopeBackedContext(scope);
         }
     }
 }
