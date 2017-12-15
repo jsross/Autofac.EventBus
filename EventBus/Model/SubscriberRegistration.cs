@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Autofac.EventBus.Model
+namespace mojr.Autofac.EventBus.Model
 {
     public class SubscriberRegistration
     {

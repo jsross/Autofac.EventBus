@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Autofac.EventBus.Infrastructure.Model
+namespace mojr.Autofac.EventBus.Infrastructure.Model
 {
     public class Subscriber
     {

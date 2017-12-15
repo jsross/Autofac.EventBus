@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using System.Collections.Concurrent;
-using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Model;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
+using mojr.Autofac.EventBus.Model;
+using Autofac;
 
-namespace Autofac.EventBus.Infrastructure.Concrete
+namespace mojr.Autofac.EventBus.Infrastructure.Concrete
 {
     public class Bus : IBus
     {

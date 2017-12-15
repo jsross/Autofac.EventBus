@@ -1,6 +1,6 @@
-﻿using Autofac.EventBus.Model;
+﻿using mojr.Autofac.EventBus.Model;
 
-namespace Autofac.EventBus.Configuration
+namespace mojr.Autofac.EventBus.Configuration
 {
     public interface EventMatcher
     {

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Model;
-using Autofac.EventBus.Infrastructure.Model;
+using mojr.Autofac.EventBus.Configuration.Attributes;
+using mojr.Autofac.EventBus.Model;
+using mojr.Autofac.EventBus.Infrastructure.Model;
+using Autofac;
 
-namespace Autofac.EventBus.Infrastructure.Abstract
+namespace mojr.Autofac.EventBus.Infrastructure.Abstract
 {
     public interface ISubscriberRegistry
     {

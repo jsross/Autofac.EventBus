@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using Autofac.EventBus.Infrastructure.Abstract;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
+using Autofac;
 
-namespace Autofac.EventBus.Infrastructure.Concrete
+namespace mojr.Autofac.EventBus.Infrastructure.Concrete
 {
     public class ScopeBackedContext : IContext
     {

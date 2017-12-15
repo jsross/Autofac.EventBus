@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Autofac.EventBus</RootNamespace>
-    <AssemblyName>Autofac.EventBus</AssemblyName>
+    <AssemblyName>mojr.Autofac.EventBus</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

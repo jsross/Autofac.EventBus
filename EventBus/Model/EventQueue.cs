@@ -1,6 +1,7 @@
-﻿using System.Collections.Concurrent;
+﻿using Autofac;
+using System.Collections.Concurrent;
 
-namespace Autofac.EventBus.Model
+namespace mojr.Autofac.EventBus.Model
 {
     public class EventQueue : ConcurrentQueue<Event>
     {

@@ -1,8 +1,8 @@
-﻿using Autofac.EventBus.Infrastructure.Abstract;
-using System;
-using System.Reflection;
+﻿using System;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
 
-namespace Autofac.EventBus.Model
+
+namespace mojr.Autofac.EventBus.Model
 {
     public class Event
     {

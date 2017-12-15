@@ -1,10 +1,10 @@
-﻿using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Infrastructure.Concrete;
+﻿using mojr.Autofac.EventBus.Configuration.Attributes;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
+using mojr.Autofac.EventBus.Infrastructure.Concrete;
 using System.Linq;
 using System.Reflection;
 
-namespace Autofac.EventBus.Configuration
+namespace mojr.Autofac.EventBus.Configuration
 {
     public static class ListenerRegistryConfigurator
     {

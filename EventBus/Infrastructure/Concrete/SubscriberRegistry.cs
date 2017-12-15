@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Model;
-using Autofac.EventBus.Infrastructure.Model;
+using mojr.Autofac.EventBus.Configuration.Attributes;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
+using mojr.Autofac.EventBus.Model;
+using mojr.Autofac.EventBus.Infrastructure.Model;
+using Autofac;
 
-namespace Autofac.EventBus.Infrastructure.Concrete
+namespace mojr.Autofac.EventBus.Infrastructure.Concrete
 {
     public class SubscriberRegistry : ISubscriberRegistry
     {

@@ -1,7 +1,7 @@
-﻿using Autofac.EventBus.Infrastructure.Abstract;
+﻿using mojr.Autofac.EventBus.Infrastructure.Abstract;
 using Castle.DynamicProxy;
 
-namespace Autofac.EventBus.Configuration.Attributes
+namespace mojr.Autofac.EventBus.Configuration.Attributes
 {
     public class EventPublisherInterceptor : IInterceptor
     {

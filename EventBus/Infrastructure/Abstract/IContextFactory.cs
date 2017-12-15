@@ -1,6 +1,6 @@
-﻿using Autofac.EventBus.Model;
+﻿using mojr.Autofac.EventBus.Model;
 
-namespace Autofac.EventBus.Infrastructure.Abstract
+namespace mojr.Autofac.EventBus.Infrastructure.Abstract
 {
     public interface IContextFactory
     {

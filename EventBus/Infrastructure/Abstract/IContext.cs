@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Autofac.EventBus.Infrastructure.Abstract
+namespace mojr.Autofac.EventBus.Infrastructure.Abstract
 {
     public interface IContext
     {

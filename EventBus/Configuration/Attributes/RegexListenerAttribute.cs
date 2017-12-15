@@ -1,8 +1,8 @@
-﻿using Autofac.EventBus.Model;
+﻿using mojr.Autofac.EventBus.Model;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Autofac.EventBus.Configuration.Attributes
+namespace mojr.Autofac.EventBus.Configuration.Attributes
 {
     public class RegexListenerAttribute : EventListenerAttribute
     {

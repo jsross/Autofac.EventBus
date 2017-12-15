@@ -1,15 +1,15 @@
-﻿using System.Reflection;
-using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Infrastructure.Concrete;
+﻿using mojr.Autofac.EventBus.Configuration.Attributes;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
+using mojr.Autofac.EventBus.Infrastructure.Concrete;
+using Autofac;
 
-namespace Autofac.EventBus.Configuration
+namespace mojr.Autofac.EventBus.Configuration
 {
     public class ConfigModule : Module
     {
         private ISubscriberRegistry _listenerRegistry;
 
-        public ConfigModule(params Assembly[] assemblies)
+        public ConfigModule(params System.Reflection.Assembly[] assemblies)
         {
             _listenerRegistry = ListenerRegistryConfigurator.Configure(assemblies);
         }

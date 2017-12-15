@@ -1,7 +1,7 @@
-﻿using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Model;
+﻿using mojr.Autofac.EventBus.Infrastructure.Abstract;
+using mojr.Autofac.EventBus.Model;
 
-namespace Autofac.EventBus.Infrastructure.Concrete
+namespace mojr.Autofac.EventBus.Infrastructure.Concrete
 {
     class ScopedBackedContextFactory : IContextFactory
     {
