@@ -1,5 +1,5 @@
 ﻿using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Models;
+using Autofac.EventBus.Model;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Autofac.EventBus.Model;
+using System;
 using System.Linq;
-using Autofac.EventBus.Models;
 
 namespace Autofac.EventBus.Configuration.Attributes
 {

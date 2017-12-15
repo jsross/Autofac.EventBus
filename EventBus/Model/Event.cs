@@ -2,7 +2,7 @@
 using System;
 using System.Reflection;
 
-namespace Autofac.EventBus.Models
+namespace Autofac.EventBus.Model
 {
     public class Event
     {

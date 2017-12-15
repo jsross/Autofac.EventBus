@@ -1,5 +1,5 @@
-﻿using System;
-using Autofac.EventBus.Models;
+﻿using Autofac.EventBus.Model;
+using System;
 
 namespace Autofac.EventBus.Configuration.Attributes
 {

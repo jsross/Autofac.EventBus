@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Collections.Concurrent;
 using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.EventBus.Models;
+using Autofac.EventBus.Model;
 
 namespace Autofac.EventBus.Infrastructure.Concrete
 {
@@ -13,7 +13,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
         private readonly ILifetimeScope _currentScope;
         private readonly ISubscriberRegistry _registry;
 
-        private ConcurrentQueue<Event> _eventQueue;
+        private EventQueue _eventQueue;
 
         private object _lockObject;
         private bool _inProcess = false;
@@ -28,7 +28,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
 
             _lockObject = new object();
 
-            _eventQueue = new ConcurrentQueue<Event>();
+            _eventQueue = new EventQueue(currentScope);
         }
 
         public void Post(string eventName,
@@ -54,12 +54,12 @@ namespace Autofac.EventBus.Infrastructure.Concrete
 
             do
             {
-                ConcurrentQueue<Event> localQueue = null;
+                EventQueue localQueue = null;
 
                 lock (_lockObject)
                 {
                     localQueue = _eventQueue;
-                    _eventQueue = new ConcurrentQueue<Event>();
+                    _eventQueue = new EventQueue(localQueue.Scope);
                 }
 
                 if (!localQueue.Any())
@@ -76,7 +76,7 @@ namespace Autofac.EventBus.Infrastructure.Concrete
             }
         }
 
-        private void ProcessQueue(ConcurrentQueue<Event> queue)
+        private void ProcessQueue(EventQueue queue)
         {
             Event @event;
 

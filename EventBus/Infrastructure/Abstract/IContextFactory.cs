@@ -1,4 +1,4 @@
-﻿using Autofac.EventBus.Models;
+﻿using Autofac.EventBus.Model;
 
 namespace Autofac.EventBus.Infrastructure.Abstract
 {

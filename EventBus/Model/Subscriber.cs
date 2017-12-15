@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Autofac.EventBus.Models;
 
 namespace Autofac.EventBus.Infrastructure.Model
 {

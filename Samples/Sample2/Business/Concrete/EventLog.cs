@@ -1,5 +1,5 @@
 ﻿using Sample2.Business.Abstract;
-using Autofac.EventBus.Models;
+using Autofac.EventBus.Model;
 using System.Diagnostics;
 
 namespace Sample2.Business.Concrete

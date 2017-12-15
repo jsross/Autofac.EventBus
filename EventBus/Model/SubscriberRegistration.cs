@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Autofac.EventBus.Models;
 
 namespace Autofac.EventBus.Model
 {

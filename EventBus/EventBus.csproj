@@ -70,6 +70,7 @@
     <Compile Include="Infrastructure\Concrete\Bus.cs" />
     <Compile Include="Infrastructure\Concrete\EventFactory.cs" />
     <Compile Include="Infrastructure\Concrete\ScopedBackedContextFactory.cs" />
+    <Compile Include="Model\EventQueue.cs" />
     <Compile Include="Model\Subscriber.cs" />
     <Compile Include="Model\SubscriberRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

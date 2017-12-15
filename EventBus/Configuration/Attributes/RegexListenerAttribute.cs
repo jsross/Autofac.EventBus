@@ -1,4 +1,4 @@
-﻿using Autofac.EventBus.Models;
+﻿using Autofac.EventBus.Model;
 using System;
 using System.Text.RegularExpressions;
 
