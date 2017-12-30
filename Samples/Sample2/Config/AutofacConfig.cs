@@ -1,6 +1,6 @@
 ﻿using Autofac;
-using Autofac.EventBus.Configuration;
 using Autofac.Extras.DynamicProxy;
+using mojr.Autofac.EventBus.Configuration;
 using Sample2.Business.Abstract;
 using Sample2.Business.Concrete;
 using System.Reflection;

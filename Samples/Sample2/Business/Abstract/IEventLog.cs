@@ -1,5 +1,5 @@
-﻿using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Model;
+﻿using mojr.Autofac.EventBus.Configuration.Attributes;
+using mojr.Autofac.EventBus.Model;
 
 namespace Sample2.Business.Abstract
 {

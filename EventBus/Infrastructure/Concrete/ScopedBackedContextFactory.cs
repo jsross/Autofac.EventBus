@@ -1,4 +1,5 @@
-﻿using mojr.Autofac.EventBus.Infrastructure.Abstract;
+﻿using Autofac;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
 using mojr.Autofac.EventBus.Model;
 
 namespace mojr.Autofac.EventBus.Infrastructure.Concrete

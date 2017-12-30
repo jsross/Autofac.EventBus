@@ -1,6 +1,6 @@
-﻿using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.Extras.DynamicProxy;
+﻿using Autofac.Extras.DynamicProxy;
+using mojr.Autofac.EventBus.Configuration.Attributes;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
 
 namespace Sample1.Business
 {

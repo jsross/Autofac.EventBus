@@ -1,6 +1,6 @@
-﻿using Autofac.EventBus.Configuration.Attributes;
-using Autofac.EventBus.Infrastructure.Abstract;
-using Autofac.Extras.DynamicProxy;
+﻿using Autofac.Extras.DynamicProxy;
+using mojr.Autofac.EventBus.Configuration.Attributes;
+using mojr.Autofac.EventBus.Infrastructure.Abstract;
 using Sample2.Business.Abstract;
 using Sample2.Models;
 
